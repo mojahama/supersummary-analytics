@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Pages — Search & Product Analysis | SuperSummary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        ca: '#2563eb',
+                        cl: '#059669',
+                        neg: '#dc2626',
+                        warm: '#d97706',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #ffffff;
+            color: #1e293b;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+        .card-accent-blue { border-left: 3px solid #2563eb; }
+        .card-accent-green { border-left: 3px solid #059669; }
+        .card-accent-red { border-left: 3px solid #dc2626; }
+        .card-accent-amber { border-left: 3px solid #d97706; }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .badge-gsc { background: #dbeafe; color: #1d4ed8; }
+        .badge-ga4 { background: #d1fae5; color: #047857; }
+        .badge-amp { background: #fef3c7; color: #b45309; }
+
+        .verdict-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .scorecard-pass {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .hold-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+
+        .evidence-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .chart-container { width: 100%; min-height: 380px; }
+
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-6 lg:p-8">
+    <div class="max-w-[1440px] mx-auto space-y-8">
+
+        <!-- ═══════════ HEADER ═══════════ -->
+        <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pb-5 border-b border-slate-200">
+            <div>
+                <p class="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-1">SuperSummary</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Character Pages — Search & Product Analysis</h1>
+                <p class="text-sm text-slate-500 mt-1">Data as of April 5, 2026 &middot; CL pages indexed 17 days</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="badge badge-gsc">GSC</span>
+                <span class="badge badge-ga4">GA4</span>
+                <span class="badge badge-amp">Amplitude</span>
+            </div>
+        </header>
+
+        <!-- ═══════════ METHODOLOGY & FRAMEWORK ═══════════ -->
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <!-- Methodology -->
+            <div class="card p-5">
+                <div class="section-label">Methodology</div>
+                <h2 class="text-lg font-semibold text-slate-900 mb-3">How We Measure</h2>
+                <ul class="space-y-2.5 text-sm text-slate-600">
+                    <li class="flex items-start gap-2.5">
+                        <span class="mt-0.5 w-5 h-5 rounded-full bg-blue-50 text-ca flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                        <span><strong class="text-slate-800">Normalize against site-wide trends.</strong> Absolute numbers are misleading when the whole site is declining. We track share-of-site instead.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="mt-0.5 w-5 h-5 rounded-full bg-blue-50 text-ca flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                        <span><strong class="text-slate-800">Weekdays only (Mon&ndash;Fri).</strong> Weekend traffic patterns are structurally different and add noise to comparisons.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="mt-0.5 w-5 h-5 rounded-full bg-blue-50 text-ca flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                        <span><strong class="text-slate-800">Multiple data sources.</strong> GSC for search visibility, GA4 for sessions, Amplitude for product engagement and real conversion (Chargebee checkout).</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="mt-0.5 w-5 h-5 rounded-full bg-blue-50 text-ca flex items-center justify-center text-xs font-bold shrink-0">4</span>
+                        <span><strong class="text-slate-800">Year-over-year comparison windows.</strong> Same calendar periods to control for seasonality.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Assessment Framework + Verdict -->
+            <div class="verdict-card rounded-xl p-5">
+                <div class="section-label" style="color: #059669;">Assessment Framework</div>
+                <h2 class="text-lg font-semibold text-slate-900 mb-3">Three-Question Content Type Test</h2>
+                <div class="space-y-2.5 mb-4">
+                    <div class="scorecard-pass rounded-lg p-3 flex items-start gap-3">
+                        <span class="text-green-600 text-lg mt-0.5 font-bold">&#10003;</span>
+                        <div>
+                            <p class="text-sm font-medium text-slate-800">Is CA's share of site traffic declining?</p>
+                            <p class="text-sm font-semibold text-green-700">NO &mdash; Stable at 2.58&ndash;2.92%</p>
+                        </div>
+                    </div>
+                    <div class="scorecard-pass rounded-lg p-3 flex items-start gap-3">
+                        <span class="text-green-600 text-lg mt-0.5 font-bold">&#10003;</span>
+                        <div>
+                            <p class="text-sm font-medium text-slate-800">Is combined CA+CL share growing?</p>
+                            <p class="text-sm font-semibold text-green-700">YES &mdash; 2.61% &rarr; 3.29%</p>
+                        </div>
+                    </div>
+                    <div class="scorecard-pass rounded-lg p-3 flex items-start gap-3">
+                        <span class="text-green-600 text-lg mt-0.5 font-bold">&#10003;</span>
+                        <div>
+                            <p class="text-sm font-medium text-slate-800">Is CL expanding or cannibalizing queries?</p>
+                            <p class="text-sm font-semibold text-green-700">EXPANDING &mdash; CL accounts for &lt;10% of shared query volume</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-3 text-center">
+                    <p class="text-xs font-bold tracking-widest uppercase text-green-700 mb-0.5">Overall Verdict</p>
+                    <p class="text-xl font-bold text-green-700">CL is Additive, Not Cannibalizing</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CL IS NOT CANNIBALIZING ═══════════ -->
+        <section class="card p-6">
+            <div class="section-label">Core Finding</div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">Is CL Cannibalizing CA? <span class="text-green-700">No.</span></h2>
+            <p class="text-sm text-slate-500 mb-5">The organic decline is driven by AI Overviews, not Character List pages</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CA Share of Site</p>
+                    <p class="text-3xl font-mono font-bold text-ca">Stable</p>
+                    <p class="text-sm text-slate-600 mt-1.5">2.58&ndash;2.92% week over week. No displacement.</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Combined CA+CL Share</p>
+                    <p class="text-3xl font-mono font-bold text-cl">+26%</p>
+                    <p class="text-sm text-slate-600 mt-1.5">2.61% &rarr; 3.29%. CL is adding net new traffic share.</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CL Search Presence</p>
+                    <p class="text-3xl font-mono font-bold text-slate-800">17 days</p>
+                    <p class="text-sm text-slate-600 mt-1.5">CL was invisible to search until Mar 20. CA's decline started months earlier.</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Site-Wide CTR Collapse</p>
+                    <p class="text-3xl font-mono font-bold text-neg">-60%</p>
+                    <p class="text-sm text-slate-600 mt-1.5">AI Overviews suppressed CTR across all character queries &mdash; matching Seer Interactive's 61% industry benchmark.</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Seasonality Controlled</p>
+                    <p class="text-3xl font-mono font-bold text-slate-800">YoY</p>
+                    <p class="text-sm text-slate-600 mt-1.5">Same calendar periods compared (Feb 15&ndash;Mar 14). The summer trough is seasonal, but the YoY decline across identical months is not.</p>
+                </div>
+            </div>
+
+            <div class="mt-5 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <p class="text-sm text-slate-700"><strong class="text-slate-900">The timeline rules out CL as the cause.</strong> In the Feb 15 &ndash; Mar 14 YoY comparison, CA impressions are up 18% and position improved from 6.2 to 3.7, yet clicks fell 37% (a loss of ~15,600 clicks/month). CL didn't even appear in search until Mar 20 &mdash; after this comparison window ended. CL's entire search history is ~1,100 clicks across 17 days. The decline is AI Overviews suppressing CTR site-wide, not CL displacement.</p>
+            <div class="mt-3 bg-white border border-slate-200 rounded-lg p-4">
+                <p class="text-sm text-slate-700"><strong class="text-slate-900">What about the Mar 20 &ndash; Apr 5 window?</strong> CA clicks did decline after CL appeared: 960/day (Mar 1&ndash;19) &rarr; 910 (Mar 20&ndash;31) &rarr; 770 (Apr 1&ndash;5), while CL grew from 0 to 134 clicks/day. On the surface this looks like displacement. But the entire site was declining in that same window &mdash; when normalized, CA's share held within its normal range (2.58&ndash;2.92%) and combined CA+CL share grew to 3.29%. We'll re-assess April 17 with enough data to confirm this trend.</p>
+            </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ A/B TESTING HOLD ═══════════ -->
+        <section class="hold-card rounded-xl p-6">
+            <div class="section-label" style="color: #b45309;">Recommendation</div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">Hold the CL Paywall A/B Test</h2>
+            <p class="text-sm text-slate-500 mb-5">We need more data before we can run a properly powered experiment</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-mono font-bold text-sm mb-3">1</div>
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">Only 17 days of search data</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">CL pages were indexed Mar 20. We need a minimum of 4 weeks to establish reliable baseline traffic patterns and control for weekly variance.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-mono font-bold text-sm mb-3">2</div>
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">CTR advantage needs confirmation</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">CL's 2.89% CTR vs CA's 1.72% is promising but could be novelty effect. Need sustained data to confirm this is structural (e.g., list format resists AI Overviews).</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-mono font-bold text-sm mb-3">3</div>
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">80% non-subscriber traffic at risk</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">CL's search CTR advantage may depend on content being freely accessible. Paywalling prematurely could kill the advantage before we understand it.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-mono font-bold text-sm mb-3">4</div>
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">Conversion rate too low for quick results</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">At ~0.4% site-wide conversion and 147 CL clicks/day, we'd need tens of thousands of visitors per test arm to detect a meaningful difference. Rushing an underpowered test wastes time and gives false confidence.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center font-mono font-bold text-sm mb-3">5</div>
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">Re-assess April 17</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">At 4 weeks post-indexing: Is the CTR advantage holding? Is traffic volume sufficient for statistical power? Design the test then.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ KEY METRIC CARDS ═══════════ -->
+        <section>
+            <div class="section-label">Key Metrics &middot; Feb 15 &ndash; Mar 14, 2026 vs Prior Year</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="card card-accent-red p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">Site Organic Sessions</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">1,096,446</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; 57.7% vs 2024</p>
+                </div>
+                <div class="card card-accent-red p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">CA Click-Through Rate</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">1.72%</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; 46% vs 2025 (was 3.20%)</p>
+                </div>
+                <div class="card card-accent-green p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">CA Avg. Position</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">3.7</p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">&#9650; 40% improved vs 2025 (was 6.2)</p>
+                </div>
+                <div class="card card-accent-green p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">CL Early Performance</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">147 <span class="text-base text-slate-400">clicks/day</span></p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">17 days indexed &middot; 3.0% CTR</p>
+                </div>
+                <div class="card card-accent-blue p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">CA+CL Share of Site</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">3.29%</p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">&#9650; from 2.61% (+26%)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CHARTS ROW 1: Traffic + CTR ═══════════ -->
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div class="card p-5">
+                <div class="section-label">Organic Traffic</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">Three-Year Organic Session Trend</h2>
+                <p class="text-xs text-slate-500 mb-4">Monthly GA4 organic sessions, Jan 2024 &ndash; Mar 2026</p>
+                <div id="chart-traffic" class="chart-container" style="height: 380px;"></div>
+            </div>
+            <div class="card p-5">
+                <div class="section-label">CTR Analysis</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">The CTR Collapse &mdash; Impressions Up, Clicks Down</h2>
+                <p class="text-xs text-slate-500 mb-4">CA pages, Feb 15 &ndash; Mar 14 comparison window</p>
+                <div id="chart-ctr" class="chart-container" style="height: 380px;"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CA MONTHLY TREND (NEW) ═══════════ -->
+        <section class="card p-5">
+            <div class="section-label">Timeline Evidence</div>
+            <h2 class="text-base font-semibold text-slate-900 mb-1">CA Clicks Were Declining Long Before CL Existed in Search</h2>
+            <p class="text-xs text-slate-500 mb-4">Monthly CA daily clicks, impressions, and CTR &mdash; Mar 2025 to Apr 2026. CL had zero search presence until Mar 20, 2026.</p>
+            <div id="chart-ca-monthly" style="height: 400px;"></div>
+        </section>
+
+        <!-- ═══════════ CHARTS ROW 2: Channels + Weekly Share ═══════════ -->
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div class="card p-5">
+                <div class="section-label">Channel Breakdown</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">Channel Mix &mdash; Only Organic Is Declining</h2>
+                <p class="text-xs text-slate-500 mb-4">Sessions by channel, Feb 15 &ndash; Mar 14 across 3 years</p>
+                <div id="chart-channels" class="chart-container" style="height: 380px;"></div>
+            </div>
+            <div class="card p-5">
+                <div class="section-label">Cannibalization Tracking</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">CA vs CL Weekly Share Analysis</h2>
+                <p class="text-xs text-slate-500 mb-4">Weekday avg clicks/day &amp; share of site traffic (Mon&ndash;Fri)</p>
+                <div id="chart-weekly" class="chart-container" style="height: 380px;"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CHARTS ROW 3: Head-to-Head ═══════════ -->
+        <section class="card p-5">
+            <div class="section-label">Head-to-Head Comparison</div>
+            <h2 class="text-base font-semibold text-slate-900 mb-1">Character Analysis vs Character List &mdash; Performance Comparison</h2>
+            <p class="text-xs text-slate-500 mb-4">CL has nearly 2x the click-through rate of CA &mdash; it may not yet trigger AI Overviews</p>
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                <!-- Stat comparison replacing broken multi-scale bar chart -->
+                <div class="grid grid-cols-2 gap-4 content-start">
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CA CTR</p>
+                        <p class="text-3xl font-mono font-bold text-ca">1.72%</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CL CTR</p>
+                        <p class="text-3xl font-mono font-bold text-cl">2.89%</p>
+                        <p class="text-xs font-semibold text-green-700 mt-1">1.7x higher</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CA Avg Position</p>
+                        <p class="text-3xl font-mono font-bold text-ca">3.7</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CL Avg Position</p>
+                        <p class="text-3xl font-mono font-bold text-cl">4.2</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CA Impressions/day</p>
+                        <p class="text-3xl font-mono font-bold text-ca">53,887</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CL Impressions/day</p>
+                        <p class="text-3xl font-mono font-bold text-cl">4,400</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CA Clicks/day</p>
+                        <p class="text-3xl font-mono font-bold text-ca">870</p>
+                    </div>
+                    <div class="text-center p-4 rounded-lg bg-white border border-slate-200">
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-wider mb-1">CL Clicks/day</p>
+                        <p class="text-3xl font-mono font-bold text-cl">147</p>
+                        <p class="text-xs text-slate-500 mt-1">17 days indexed</p>
+                    </div>
+                </div>
+                <div id="chart-weekly-ctr" style="height: 380px;"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CHARTS ROW 4: Query Overlap ═══════════ -->
+        <section class="card p-5">
+            <div class="section-label">Query Competition</div>
+            <h2 class="text-base font-semibold text-slate-900 mb-1">Top Overlapping Queries &mdash; CA vs CL Clicks</h2>
+            <p class="text-xs text-slate-500 mb-4">Queries where both CA and CL received clicks (Mar 20 &ndash; Apr 3)</p>
+            <div id="chart-queries" class="chart-container" style="height: 420px;"></div>
+        </section>
+
+        <!-- ═══════════ AMPLITUDE DATA ═══════════ -->
+        <section>
+            <div class="section-label">Product Analytics &middot; Amplitude</div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">CL Product Engagement & Conversion</h2>
+            <p class="text-sm text-slate-500 mb-5">Real payment conversions via Chargebee, not GA4 paywall triggers</p>
+
+            <!-- Amplitude metric cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="card card-accent-green p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">CL Return Rate vs CA</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">1.6x</p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">Day 7: 10.2% vs 6.4%</p>
+                </div>
+                <div class="card card-accent-green p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">Accordion Engagement</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">50%</p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">Users expanding character details</p>
+                </div>
+                <div class="card card-accent-amber p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">Non-Subscriber Traffic</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">80%</p>
+                    <p class="text-xs text-amber-600 font-semibold mt-1">Acquisition surface for new users</p>
+                </div>
+                <div class="card card-accent-red p-4">
+                    <p class="text-xs text-slate-500 font-medium mb-1">Site-Wide Conversion Rate</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">0.40%</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; from 0.49% &mdash; site-wide, not CL-specific</p>
+                </div>
+            </div>
+
+            <!-- Amplitude charts row -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <!-- Retention comparison -->
+                <div class="card p-5">
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">Retention: CL vs CA Visitors</h3>
+                    <p class="text-xs text-slate-500 mb-3">% returning after first visit</p>
+                    <div id="chart-retention" style="height: 280px;"></div>
+                </div>
+                <!-- Conversion: CL-books vs non-CL-books -->
+                <div class="card p-5">
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">Conversion: CL-Books vs Non-CL-Books</h3>
+                    <p class="text-xs text-slate-500 mb-3">Chargebee checkout rate by week</p>
+                    <div id="chart-conversion" style="height: 280px;"></div>
+                </div>
+                <!-- Audience breakdown -->
+                <div class="card p-5">
+                    <h3 class="text-sm font-semibold text-slate-900 mb-1">CL Audience Breakdown</h3>
+                    <p class="text-xs text-slate-500 mb-3">By user type, Mar 19 &ndash; Apr 6</p>
+                    <div id="chart-audience" style="height: 280px;"></div>
+                </div>
+            </div>
+
+            <!-- Amplitude context -->
+            <div class="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <p class="text-sm text-slate-700"><strong class="text-slate-900">Conversion decline is site-wide, not CL-specific.</strong> Both CL-books and non-CL-books saw conversion rates drop ~16&ndash;19%. CL-books have always converted 45&ndash;87% better than non-CL-books &mdash; that's selection bias (the best-performing books received CL pages first), not CL's causal impact. CL's real value is engagement and retention: visitors return at 1.6x the rate of CA visitors and interact deeply with the content.</p>
+            </div>
+        </section>
+
+        <!-- ═══════════ TRAFFIC TREND BY CONTENT TYPE ═══════════ -->
+        <section class="card p-5">
+            <div class="section-label">Amplitude &middot; Traffic Trend</div>
+            <h2 class="text-base font-semibold text-slate-900 mb-1">CL-Book Page Views &mdash; Summary, CA, and CL</h2>
+            <p class="text-xs text-slate-500 mb-4">For books that have CL pages &mdash; current vs previous month daily averages</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Summary Views/Day</p>
+                    <p class="text-2xl font-mono font-bold text-slate-800">10,088</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; 11.7% from 11,427</p>
+                </div>
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CA Views/Day</p>
+                    <p class="text-2xl font-mono font-bold text-ca">1,453</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; 11.0% from 1,632</p>
+                </div>
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Checkouts/Day</p>
+                    <p class="text-2xl font-mono font-bold text-warm">47</p>
+                    <p class="text-xs text-red-600 font-semibold mt-1">&#9660; 23.0% from 61</p>
+                </div>
+            </div>
+            <p class="text-xs text-slate-500 mt-3">Summary and CA declined at the same rate (~11%) &mdash; consistent with site-wide trend, not CL cannibalization. Checkout decline (-23%) reflects a broader conversion rate drop.</p>
+        </section>
+
+        <!-- ═══════════ INDUSTRY CONTEXT ═══════════ -->
+        <section class="card p-5">
+            <div class="section-label">Industry Context</div>
+            <h2 class="text-base font-semibold text-slate-900 mb-3">The CTR decline is industry-wide, driven by AI Overviews</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-white rounded-lg p-3 border border-slate-200">
+                    <p class="text-2xl font-bold font-mono text-red-700">61%</p>
+                    <p class="text-xs text-slate-700 mt-0.5">CTR drop when AI Overviews appear</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Seer Interactive</p>
+                </div>
+                <div class="bg-white rounded-lg p-3 border border-slate-200">
+                    <p class="text-2xl font-bold font-mono text-amber-700">88%</p>
+                    <p class="text-xs text-slate-700 mt-0.5">AI Overview queries are informational</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Semrush</p>
+                </div>
+                <div class="bg-white rounded-lg p-3 border border-slate-200">
+                    <p class="text-2xl font-bold font-mono text-red-700">49%</p>
+                    <p class="text-xs text-slate-700 mt-0.5">Traffic decline &mdash; Chegg (educational peer)</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Chegg earnings report</p>
+                </div>
+                <div class="bg-white rounded-lg p-3 border border-slate-200">
+                    <p class="text-2xl font-bold font-mono text-red-700">33%</p>
+                    <p class="text-xs text-slate-700 mt-0.5">Google traffic decline for publishers globally</p>
+                    <p class="text-[10px] text-slate-400 mt-1">Press Gazette</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ FOOTER ═══════════ -->
+        <footer class="border-t border-slate-200 pt-4 pb-8">
+            <p class="text-xs text-slate-400">SuperSummary Data Analytics &middot; GSC + GA4 + Amplitude &middot; Built with ECharts + Tailwind CSS</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // ── Utilities ──────────────────────────────────────────────
+        const fmt = (n) => n.toLocaleString('en-US');
+        const BLUE = '#2563eb';
+        const EMERALD = '#059669';
+        const ROSE = '#dc2626';
+        const SLATE = '#94a3b8';
+        const AMBER = '#d97706';
+
+        const axisLabelStyle = { color: '#64748b', fontSize: 11, fontFamily: 'Inter' };
+        const splitLineStyle = { lineStyle: { color: '#e2e8f0' } };
+        const tooltipTheme = {
+            backgroundColor: '#1e293b',
+            borderColor: '#334155',
+            textStyle: { color: '#e2e8f0', fontSize: 12, fontFamily: 'Inter' }
+        };
+
+        // ── Chart 1: Three-Year Organic Traffic ────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-traffic'));
+            const months = [
+                '2024-01','2024-02','2024-03','2024-04','2024-05','2024-06',
+                '2024-07','2024-08','2024-09','2024-10','2024-11','2024-12',
+                '2025-01','2025-02','2025-03','2025-04','2025-05','2025-06',
+                '2025-07','2025-08','2025-09','2025-10','2025-11','2025-12',
+                '2026-01','2026-02','2026-03'
+            ];
+            const values = [
+                2363130,2495225,2491466,2571205,2150457,1310420,
+                1153072,1481902,2033389,2042242,1949433,1624172,
+                1787432,1805401,1756991,1594928,1441437,897858,
+                716524,791157,986323,1011565,845255,714467,
+                1018511,1119941,1127329
+            ];
+            const labels = months.map(m => {
+                const [y,mo] = m.split('-');
+                const names = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                return names[parseInt(mo)] + ' ' + y.slice(2);
+            });
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme,
+                    trigger: 'axis',
+                    formatter: (p) => `<strong>${p[0].axisValueLabel}</strong><br/>Sessions: <strong>${fmt(p[0].value)}</strong>`
+                },
+                grid: { left: 70, right: 30, top: 50, bottom: 60 },
+                xAxis: {
+                    type: 'category',
+                    data: labels,
+                    axisLabel: { ...axisLabelStyle, rotate: 45, interval: 2 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { ...axisLabelStyle, formatter: v => (v / 1e6).toFixed(1) + 'M' },
+                    splitLine: splitLineStyle,
+                    axisLine: { show: false }
+                },
+                dataZoom: [{ type: 'inside', start: 0, end: 100 }],
+                series: [{
+                    type: 'line',
+                    data: values,
+                    smooth: 0.3,
+                    symbol: 'circle',
+                    symbolSize: 5,
+                    lineStyle: { color: BLUE, width: 2.5 },
+                    itemStyle: { color: BLUE },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(37,99,235,0.15)' },
+                            { offset: 1, color: 'rgba(37,99,235,0.01)' }
+                        ])
+                    },
+                    markArea: {
+                        silent: true,
+                        data: [[
+                            { xAxis: 'May 25', itemStyle: { color: 'rgba(220,38,38,0.06)' }, label: { show: true, position: 'insideTop', formatter: 'AI Overviews\nExpansion', color: '#dc2626', fontSize: 10, fontWeight: 600 } },
+                            { xAxis: 'Mar 26' }
+                        ]]
+                    },
+                    markLine: {
+                        silent: true,
+                        symbol: 'none',
+                        data: [{
+                            xAxis: 'Mar 26',
+                            lineStyle: { color: EMERALD, type: 'dashed', width: 1.5 },
+                            label: { formatter: 'CL Indexed', color: EMERALD, fontSize: 10, fontWeight: 600, position: 'insideEndTop' }
+                        }]
+                    }
+                }]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 2: CTR Collapse ──────────────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-ctr'));
+            chart.setOption({
+                tooltip: { ...tooltipTheme, trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: {
+                    data: ['2025', '2026'],
+                    textStyle: { color: '#64748b', fontSize: 12 },
+                    top: 0, right: 0
+                },
+                grid: { left: 70, right: 70, top: 50, bottom: 40 },
+                xAxis: {
+                    type: 'category',
+                    data: ['Impressions', 'Clicks', 'CTR (%)', 'Avg Position'],
+                    axisLabel: axisLabelStyle,
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: [
+                    {
+                        type: 'value', name: 'Volume',
+                        nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                        axisLabel: { ...axisLabelStyle, formatter: v => v >= 1000 ? (v/1000).toFixed(0)+'K' : v },
+                        splitLine: splitLineStyle, axisLine: { show: false }
+                    },
+                    {
+                        type: 'value', name: 'Rate / Position',
+                        nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                        axisLabel: axisLabelStyle,
+                        splitLine: { show: false }, axisLine: { show: false }
+                    }
+                ],
+                series: [
+                    {
+                        name: '2025', type: 'bar', barGap: '10%',
+                        data: [
+                            { value: 1335793, itemStyle: { color: '#93c5fd' } },
+                            { value: 42817, itemStyle: { color: '#93c5fd' } },
+                            { value: 3.20, itemStyle: { color: '#93c5fd' } },
+                            { value: 6.2, itemStyle: { color: '#93c5fd' } }
+                        ],
+                        label: {
+                            show: true, position: 'top', fontSize: 10, color: '#64748b',
+                            formatter: (p) => ['1.34M', '42,817', '3.20%', '6.2'][p.dataIndex]
+                        }
+                    },
+                    {
+                        name: '2026', type: 'bar',
+                        data: [
+                            { value: 1576624, itemStyle: { color: BLUE } },
+                            { value: 27174, itemStyle: { color: ROSE } },
+                            { value: 1.72, itemStyle: { color: ROSE } },
+                            { value: 3.7, itemStyle: { color: EMERALD } }
+                        ],
+                        label: {
+                            show: true, position: 'top', fontSize: 10, fontWeight: 'bold',
+                            formatter: (p) => {
+                                const deltas = ['+18%', '-37%', '-46%', '+40%'];
+                                const vals = ['1.58M', '27,174', '1.72%', '3.7'];
+                                return vals[p.dataIndex] + '\n{delta|' + deltas[p.dataIndex] + '}';
+                            },
+                            rich: { delta: { fontSize: 10, fontWeight: 'bold', padding: [2, 0, 0, 0] } },
+                            color: (p) => [BLUE, ROSE, ROSE, EMERALD][p.dataIndex]
+                        }
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart: CA Monthly Trend (clicks, impressions, CTR) ─────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-ca-monthly'));
+            const periods = [
+                'Mar 25', 'Apr 25', 'May 25', 'Jun 25', 'Jul 25', 'Aug 25',
+                'Sep 25', 'Oct 25', 'Nov 25', 'Dec 25', 'Jan 26', 'Feb 26',
+                'Mar 1-19', 'Mar 20-31', 'Apr 1-5'
+            ];
+            const caClicks = [1130, 1070, 1290, 580, 520, 560, 490, 380, 330, 320, 820, 970, 960, 910, 770];
+            const caImpressions = [35200, 42500, 62000, 21000, 21000, 21000, 21000, 16000, 13500, 14500, 51000, 59000, 52000, 53000, 50000];
+            const caCTR = [3.20, 2.50, 2.10, 2.80, 2.50, 2.70, 2.30, 2.40, 2.40, 2.20, 1.60, 1.60, 1.80, 1.70, 1.50];
+            const clClicks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 78, 134];
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => {
+                            if (p.value == null) return;
+                            if (p.seriesName === 'CA CTR') s += `${p.marker} ${p.seriesName}: <strong>${p.value.toFixed(2)}%</strong><br/>`;
+                            else s += `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}/day</strong><br/>`;
+                        });
+                        return s;
+                    }
+                },
+                legend: {
+                    data: ['CA Clicks/day', 'CL Clicks/day', 'CA Impressions/day', 'CA CTR'],
+                    textStyle: { color: '#64748b', fontSize: 11 }, top: 0
+                },
+                grid: { left: 70, right: 70, top: 45, bottom: 40 },
+                xAxis: {
+                    type: 'category', data: periods,
+                    axisLabel: { ...axisLabelStyle, rotate: 30, interval: 0, fontSize: 10 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: [
+                    {
+                        type: 'value', name: 'Volume/day',
+                        nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                        axisLabel: { ...axisLabelStyle, formatter: v => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v },
+                        splitLine: splitLineStyle, axisLine: { show: false }
+                    },
+                    {
+                        type: 'value', name: 'CTR %',
+                        nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                        axisLabel: { ...axisLabelStyle, formatter: '{value}%' },
+                        splitLine: { show: false }, axisLine: { show: false },
+                        min: 0, max: 4
+                    }
+                ],
+                series: [
+                    {
+                        name: 'CA Impressions/day', type: 'bar',
+                        data: caImpressions,
+                        itemStyle: { color: '#bfdbfe', borderRadius: [3, 3, 0, 0] },
+                        barWidth: '40%', z: 1
+                    },
+                    {
+                        name: 'CA Clicks/day', type: 'line',
+                        data: caClicks,
+                        lineStyle: { color: BLUE, width: 2.5 }, itemStyle: { color: BLUE },
+                        symbol: 'circle', symbolSize: 6, z: 3
+                    },
+                    {
+                        name: 'CL Clicks/day', type: 'line',
+                        data: clClicks.map(v => v === 0 ? null : v),
+                        lineStyle: { color: EMERALD, width: 2.5 }, itemStyle: { color: EMERALD },
+                        symbol: 'circle', symbolSize: 6, connectNulls: false, z: 3
+                    },
+                    {
+                        name: 'CA CTR', type: 'line', yAxisIndex: 1,
+                        data: caCTR,
+                        lineStyle: { color: AMBER, width: 2, type: 'dashed' }, itemStyle: { color: AMBER },
+                        symbol: 'diamond', symbolSize: 6, z: 2
+                    }
+                ],
+                markLine: { silent: true, symbol: 'none' }
+            });
+
+            // Add CL indexed marker
+            chart.setOption({
+                series: [{}, {}, {
+                    markLine: {
+                        silent: true, symbol: 'none',
+                        data: [{
+                            xAxis: 'Mar 20-31',
+                            lineStyle: { color: EMERALD, type: 'dashed', width: 2 },
+                            label: { formatter: 'CL Indexed\nMar 20', color: EMERALD, fontSize: 10, fontWeight: 600, position: 'insideEndTop' }
+                        }]
+                    },
+                    markArea: {
+                        silent: true,
+                        data: [[
+                            { xAxis: 'Mar 25', itemStyle: { color: 'rgba(220,38,38,0.04)' }, label: { show: true, position: 'insideTop', formatter: '12 months of decline\nbefore CL entered search', color: '#94a3b8', fontSize: 10, fontStyle: 'italic' } },
+                            { xAxis: 'Mar 1-19' }
+                        ]]
+                    }
+                }, {}]
+            });
+
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 3: Channel Mix ───────────────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-channels'));
+            const channels = ['Referral', 'Paid Search', 'Cross-network', 'Direct', 'Organic Search'];
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis', axisPointer: { type: 'shadow' },
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => { s += `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}</strong><br/>`; });
+                        return s;
+                    }
+                },
+                legend: {
+                    data: ['2024', '2025', '2026'],
+                    textStyle: { color: '#64748b', fontSize: 12 },
+                    top: 0, right: 0
+                },
+                grid: { left: 130, right: 40, top: 40, bottom: 20 },
+                yAxis: {
+                    type: 'category', data: channels,
+                    axisLabel: { ...axisLabelStyle, fontSize: 12 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                xAxis: {
+                    type: 'value',
+                    axisLabel: { ...axisLabelStyle, formatter: v => v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v },
+                    splitLine: splitLineStyle, axisLine: { show: false }
+                },
+                series: [
+                    { name: '2024', type: 'bar', data: [8302, 37880, 40879, 185981, 2594348], itemStyle: { color: '#cbd5e1' }, barGap: '10%' },
+                    { name: '2025', type: 'bar', data: [13723, 28123, 82573, 173041, 1730176], itemStyle: { color: '#93c5fd' } },
+                    { name: '2026', type: 'bar', data: [14887, 72985, 143083, 239618, 1096446], itemStyle: { color: (p) => p.dataIndex === 4 ? ROSE : EMERALD } }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 4: Weekly Share Analysis ─────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-weekly'));
+            const weeks = ['W1\nMar 2-6', 'W2\nMar 9-13', 'W3\nMar 16-20', 'W4\nMar 23-27', 'W5\nMar 30-Apr 3'];
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis', axisPointer: { type: 'shadow' },
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel.replace('\n', ' ')}</strong><br/>`;
+                        params.forEach(p => {
+                            s += p.seriesName === 'CA+CL Share'
+                                ? `${p.marker} ${p.seriesName}: <strong>${p.value.toFixed(2)}%</strong><br/>`
+                                : `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)} clicks/day</strong><br/>`;
+                        });
+                        return s;
+                    }
+                },
+                legend: {
+                    data: ['CA clicks/day', 'CL clicks/day', 'CA+CL Share'],
+                    textStyle: { color: '#64748b', fontSize: 11 }, top: 0
+                },
+                grid: { left: 60, right: 60, top: 50, bottom: 50 },
+                xAxis: {
+                    type: 'category', data: weeks,
+                    axisLabel: { ...axisLabelStyle, interval: 0, lineHeight: 16 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: [
+                    { type: 'value', name: 'Clicks/day', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: splitLineStyle, axisLine: { show: false }, max: 1200 },
+                    { type: 'value', name: 'Share %', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: { ...axisLabelStyle, formatter: '{value}%' }, splitLine: { show: false }, axisLine: { show: false }, min: 2, max: 4 }
+                ],
+                series: [
+                    { name: 'CA clicks/day', type: 'bar', stack: 'clicks', data: [1008, 976, 993, 983, 826], itemStyle: { color: BLUE }, barWidth: '45%' },
+                    { name: 'CL clicks/day', type: 'bar', stack: 'clicks', data: [0, 0, 0, 14, 132], itemStyle: { color: EMERALD, borderRadius: [4, 4, 0, 0] } },
+                    {
+                        name: 'CA+CL Share', type: 'line', yAxisIndex: 1,
+                        data: [2.61, 2.58, 2.92, 2.78, 3.29],
+                        lineStyle: { color: AMBER, width: 2.5 }, itemStyle: { color: AMBER },
+                        symbol: 'circle', symbolSize: 8,
+                        label: { show: true, position: 'top', color: AMBER, fontSize: 11, fontWeight: 600, formatter: p => p.value.toFixed(2) + '%' }
+                    }
+                ]
+            });
+            chart.setOption({
+                series: [{}, {}, {
+                    markLine: {
+                        silent: true, symbol: 'none',
+                        data: [{ xAxis: 2.5, lineStyle: { color: EMERALD, type: 'dashed', width: 1.5 }, label: { formatter: 'CL Indexed\nMar 20', color: EMERALD, fontSize: 10, fontWeight: 600, position: 'insideEndTop' } }]
+                    }
+                }]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 5: Weekly CTR Trend CA vs CL ────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-weekly-ctr'));
+            const weeks = ['W1\nMar 2-6', 'W2\nMar 9-13', 'W3\nMar 16-20', 'W4\nMar 23-27', 'W5\nMar 30-Apr 3'];
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel.replace('\n', ' ')}</strong><br/>`;
+                        params.forEach(p => { if (p.value != null) s += `${p.marker} ${p.seriesName}: <strong>${p.value.toFixed(2)}%</strong><br/>`; });
+                        return s;
+                    }
+                },
+                legend: { data: ['CA CTR', 'CL CTR'], textStyle: { color: '#64748b', fontSize: 12 }, top: 25, right: 0 },
+                grid: { left: 50, right: 30, top: 60, bottom: 40 },
+                xAxis: {
+                    type: 'category', data: weeks,
+                    axisLabel: { ...axisLabelStyle, interval: 0, lineHeight: 16 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: {
+                    type: 'value', name: 'CTR %', nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                    axisLabel: { ...axisLabelStyle, formatter: '{value}%' },
+                    splitLine: splitLineStyle, axisLine: { show: false }, min: 0, max: 4
+                },
+                series: [
+                    {
+                        name: 'CA CTR', type: 'line', data: [1.65, 1.83, 1.80, 1.64, 1.61],
+                        lineStyle: { color: BLUE, width: 2.5 }, itemStyle: { color: BLUE },
+                        symbol: 'circle', symbolSize: 8,
+                        label: { show: true, position: 'bottom', color: BLUE, fontSize: 10, formatter: p => p.value.toFixed(2) + '%' }
+                    },
+                    {
+                        name: 'CL CTR', type: 'line', data: [null, null, null, 3.09, 2.76],
+                        lineStyle: { color: EMERALD, width: 2.5 }, itemStyle: { color: EMERALD },
+                        symbol: 'circle', symbolSize: 8, connectNulls: false,
+                        label: { show: true, position: 'top', color: EMERALD, fontSize: 10, fontWeight: 'bold', formatter: p => p.value ? p.value.toFixed(2) + '%' : '' }
+                    }
+                ]
+            });
+            chart.setOption({
+                graphic: [{
+                    type: 'text', left: 'center', top: 8,
+                    style: { text: 'CL CTR is ~1.7x higher than CA — possible AI Overview advantage', fill: AMBER, fontSize: 11, fontWeight: 600, fontFamily: 'Inter' }
+                }]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 6: Query Overlap ─────────────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-queries'));
+            const queries = [
+                'theo of golden characters', 'characters in theo of golden', 'the briar club characters',
+                'the correspondent char. list', 'what we can know characters', 'the correspondent characters',
+                'theo of golden character list', 'the borrowed life characters', 'briar club characters',
+                'shield of sparrows characters'
+            ];
+            const caClicks = [121, 71, 55, 48, 43, 36, 28, 20, 17, 13];
+            const clClicks = [24, 11, 9, 4, 6, 3, 9, 6, 3, 8];
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis', axisPointer: { type: 'shadow' },
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => { s += `${p.marker} ${p.seriesName}: <strong>${p.value} clicks</strong><br/>`; });
+                        const total = params.reduce((a, p) => a + p.value, 0);
+                        const clPct = ((params[1]?.value || 0) / total * 100).toFixed(1);
+                        s += `<span style="color:#94a3b8">CL share: ${clPct}%</span>`;
+                        return s;
+                    }
+                },
+                legend: {
+                    data: ['Character Analysis (CA)', 'Character List (CL)'],
+                    textStyle: { color: '#64748b', fontSize: 11 }, top: 0
+                },
+                grid: { left: 200, right: 40, top: 40, bottom: 20 },
+                yAxis: {
+                    type: 'category', data: queries.reverse(),
+                    axisLabel: { ...axisLabelStyle, fontSize: 11, width: 180, overflow: 'truncate' },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }, inverse: false
+                },
+                xAxis: {
+                    type: 'value', axisLabel: axisLabelStyle, splitLine: splitLineStyle,
+                    axisLine: { show: false }, name: 'Clicks', nameTextStyle: { color: '#94a3b8', fontSize: 10 }
+                },
+                series: [
+                    {
+                        name: 'Character Analysis (CA)', type: 'bar', stack: 'total',
+                        data: caClicks.reverse(), itemStyle: { color: BLUE }, barWidth: '55%',
+                        label: { show: true, position: 'inside', color: '#fff', fontSize: 10, formatter: p => p.value > 15 ? p.value : '' }
+                    },
+                    {
+                        name: 'Character List (CL)', type: 'bar', stack: 'total',
+                        data: clClicks.reverse(), itemStyle: { color: EMERALD },
+                        label: { show: true, position: 'inside', color: '#fff', fontSize: 10, formatter: p => p.value > 3 ? p.value : '' }
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 7: Retention Comparison (Amplitude) ──────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-retention'));
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => { s += `${p.marker} ${p.seriesName}: <strong>${p.value}%</strong><br/>`; });
+                        return s;
+                    }
+                },
+                legend: { data: ['CL Visitors', 'CA Visitors'], textStyle: { color: '#64748b', fontSize: 11 }, top: 0 },
+                grid: { left: 45, right: 15, top: 35, bottom: 25 },
+                xAxis: {
+                    type: 'category', data: ['Day 1', 'Day 3', 'Day 7', 'Day 14'],
+                    axisLabel: axisLabelStyle, axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: {
+                    type: 'value', axisLabel: { ...axisLabelStyle, formatter: '{value}%' },
+                    splitLine: splitLineStyle, axisLine: { show: false }, max: 30
+                },
+                series: [
+                    {
+                        name: 'CL Visitors', type: 'line',
+                        data: [22.5, 14.8, 10.2, 7.1],
+                        lineStyle: { color: EMERALD, width: 2.5 }, itemStyle: { color: EMERALD },
+                        symbol: 'circle', symbolSize: 7,
+                        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(5,150,105,0.12)' }, { offset: 1, color: 'rgba(5,150,105,0)' }]) },
+                        label: { show: true, position: 'top', color: EMERALD, fontSize: 10, fontWeight: 600, formatter: p => p.value + '%' }
+                    },
+                    {
+                        name: 'CA Visitors', type: 'line',
+                        data: [14.1, 9.2, 6.4, 4.5],
+                        lineStyle: { color: BLUE, width: 2.5 }, itemStyle: { color: BLUE },
+                        symbol: 'circle', symbolSize: 7,
+                        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(37,99,235,0.08)' }, { offset: 1, color: 'rgba(37,99,235,0)' }]) },
+                        label: { show: true, position: 'bottom', color: BLUE, fontSize: 10, formatter: p => p.value + '%' }
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 8: Conversion by Book Type (Amplitude) ───────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-conversion'));
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => { s += `${p.marker} ${p.seriesName}: <strong>${p.value}%</strong><br/>`; });
+                        return s;
+                    }
+                },
+                legend: { data: ['Books WITH CL', 'Books WITHOUT CL'], textStyle: { color: '#64748b', fontSize: 11 }, top: 0 },
+                grid: { left: 45, right: 15, top: 35, bottom: 25 },
+                xAxis: {
+                    type: 'category', data: ['Feb 23', 'Mar 2', 'Mar 9', 'Mar 16', 'Mar 23', 'Mar 30'],
+                    axisLabel: axisLabelStyle, axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: {
+                    type: 'value', axisLabel: { ...axisLabelStyle, formatter: '{value}%' },
+                    splitLine: splitLineStyle, axisLine: { show: false }, min: 0.2, max: 0.8
+                },
+                series: [
+                    {
+                        name: 'Books WITH CL', type: 'line',
+                        data: [0.600, 0.706, 0.571, 0.469, 0.498, 0.549],
+                        smooth: true, symbol: 'circle', symbolSize: 7,
+                        lineStyle: { color: EMERALD, width: 2.5 }, itemStyle: { color: EMERALD },
+                        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(5,150,105,0.12)' }, { offset: 1, color: 'rgba(5,150,105,0)' }]) }
+                    },
+                    {
+                        name: 'Books WITHOUT CL', type: 'line',
+                        data: [0.415, 0.378, 0.345, 0.289, 0.311, 0.310],
+                        smooth: true, symbol: 'circle', symbolSize: 7,
+                        lineStyle: { color: BLUE, width: 2.5 }, itemStyle: { color: BLUE },
+                        areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(37,99,235,0.08)' }, { offset: 1, color: 'rgba(37,99,235,0)' }]) }
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── Chart 9: Audience Breakdown (Amplitude) ────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-audience'));
+            chart.setOption({
+                series: [{
+                    type: 'pie',
+                    radius: ['45%', '78%'],
+                    center: ['50%', '52%'],
+                    avoidLabelOverlap: true,
+                    itemStyle: { borderColor: '#ffffff', borderWidth: 2, borderRadius: 4 },
+                    label: {
+                        show: true, position: 'outside',
+                        formatter: '{b}\n{d}%', fontSize: 10, color: '#64748b',
+                        fontFamily: 'Inter, system-ui, sans-serif', lineHeight: 14
+                    },
+                    labelLine: { lineStyle: { color: '#cbd5e1' }, length: 8, length2: 12 },
+                    data: [
+                        { value: 64.7, name: 'Book Club', itemStyle: { color: EMERALD } },
+                        { value: 10.0, name: 'Teachers', itemStyle: { color: BLUE } },
+                        { value: 9.5, name: 'Students', itemStyle: { color: '#7c3aed' } },
+                        { value: 9.9, name: 'Other', itemStyle: { color: '#94a3b8' } },
+                        { value: 3.8, name: 'Parents', itemStyle: { color: AMBER } },
+                        { value: 2.1, name: 'Librarians', itemStyle: { color: ROSE } }
+                    ]
+                }],
+                tooltip: {
+                    ...tooltipTheme,
+                    formatter: '{b}: {d}%'
+                }
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+    </script>
+</body>
+</html>
