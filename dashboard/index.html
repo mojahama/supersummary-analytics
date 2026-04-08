@@ -270,9 +270,9 @@
                     <p class="text-xs text-green-700 font-semibold mt-1">&#9650; 40% improved vs 2025 (was 6.2)</p>
                 </div>
                 <div class="card card-accent-green p-4">
-                    <p class="text-xs text-slate-500 font-medium mb-1">CL Early Performance</p>
-                    <p class="text-2xl font-bold font-mono text-slate-900">147 <span class="text-base text-slate-400">clicks/day</span></p>
-                    <p class="text-xs text-green-700 font-semibold mt-1">17 days indexed &middot; 3.0% CTR</p>
+                    <p class="text-xs text-slate-500 font-medium mb-1">CL Search Performance</p>
+                    <p class="text-2xl font-bold font-mono text-slate-900">156 <span class="text-base text-slate-400">clicks/day</span></p>
+                    <p class="text-xs text-green-700 font-semibold mt-1">365 pages &middot; 2.89% CTR &middot; Apr 1-6 avg</p>
                 </div>
                 <div class="card card-accent-blue p-4">
                     <p class="text-xs text-slate-500 font-medium mb-1">CA+CL Share of Site</p>
@@ -369,6 +369,57 @@
             </div>
         </section>
 
+        <!-- ═══════════ CL GROWTH: Daily + Weekly ═══════════ -->
+        <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div class="card p-5">
+                <div class="section-label">CL Search Growth &middot; Daily</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">Daily CL Search Clicks vs CA</h2>
+                <p class="text-xs text-slate-500 mb-4">GSC clicks per day, Mar 20 &ndash; Apr 7, 2026</p>
+                <div id="chart-cl-daily" style="height: 380px;"></div>
+            </div>
+            <div class="card p-5">
+                <div class="section-label">CL Search Growth &middot; Weekly</div>
+                <h2 class="text-base font-semibold text-slate-900 mb-1">Weekly CL Search Clicks</h2>
+                <p class="text-xs text-slate-500 mb-4">CL clicks aggregated by week since indexing</p>
+                <div id="chart-cl-weekly" style="height: 380px;"></div>
+            </div>
+        </section>
+
+        <!-- ═══════════ PER-PAGE EFFICIENCY ═══════════ -->
+        <section class="card p-6">
+            <div class="section-label">Per-Page SEO Efficiency</div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">CL generates <span class="text-cl">2x the clicks per page</span> vs CA</h2>
+            <p class="text-sm text-slate-500 mb-5">870 CA clicks/day across 4,001 pages vs 156 CL clicks/day across 365 pages (Mar 20 &ndash; Apr 7)</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CA Pages in Search</p>
+                    <p class="text-3xl font-mono font-bold text-ca">4,001</p>
+                </div>
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CL Pages in Search</p>
+                    <p class="text-3xl font-mono font-bold text-cl">365</p>
+                </div>
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CA Clicks / Page / Day</p>
+                    <p class="text-3xl font-mono font-bold text-ca">0.22</p>
+                </div>
+                <div class="evidence-card text-center">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CL Clicks / Page / Day</p>
+                    <p class="text-3xl font-mono font-bold text-cl">0.43</p>
+                    <p class="text-xs font-semibold text-green-700 mt-1">1.95x more efficient</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-lg p-4">
+                <p class="text-sm text-slate-700"><strong class="text-slate-900">Selection bias caveat:</strong> CL pages were created for SuperSummary's most popular titles first, so they naturally skew toward higher-traffic books. The per-page advantage may narrow as CL expands to the long tail. However, the 2x efficiency with 365 pages already indexed is a strong early signal &mdash; if this trend holds as CL scales, it would outperform CA on a per-page SEO basis.</p>
+            </div>
+
+            <div class="mt-4 bg-white border border-slate-200 rounded-lg p-4">
+                <p class="text-sm text-slate-700"><strong class="text-slate-900">GA4 session data (Mar 20 &ndash; Apr 7):</strong> 384 CL pages received 2,479 landing sessions with 66.6% engagement rate. <strong class="text-warm">Note:</strong> GA4 conversion events need verification &mdash; the configured conversion fires at ~93% rate, suggesting it's a low-bar event (page_view or scroll), not actual purchases. Use Amplitude's Chargebee checkout data for real conversion rates.</p>
+            </div>
+        </section>
+
         <!-- ═══════════ CHARTS ROW 4: Query Overlap ═══════════ -->
         <section class="card p-5">
             <div class="section-label">Query Competition</div>
@@ -382,6 +433,10 @@
             <div class="section-label">Product Analytics &middot; Amplitude</div>
             <h2 class="text-xl font-bold text-slate-900 mb-1">CL Product Engagement & Conversion</h2>
             <p class="text-sm text-slate-500 mb-5">Real payment conversions via Chargebee, not GA4 paywall triggers</p>
+
+            <div class="bg-white border border-amber-200 rounded-lg p-4 mb-5">
+                <p class="text-sm text-slate-700"><strong class="text-warm">GA4 conversion data caveat:</strong> GA4's configured conversion event fires at ~93% of sessions, indicating it tracks a low-bar action (page scroll, content view, or paywall trigger) rather than actual purchases. This makes GA4 conversion rates unreliable for measuring CL's revenue impact. Amplitude tracks real Chargebee checkout completions and shows a site-wide conversion rate of 0.40% &mdash; use Amplitude for all conversion analysis. GA4 session and engagement data remain valid.</p>
+            </div>
 
             <!-- Amplitude metric cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -900,6 +955,100 @@
                     type: 'text', left: 'center', top: 8,
                     style: { text: 'CL CTR is ~1.7x higher than CA — possible AI Overview advantage', fill: AMBER, fontSize: 11, fontWeight: 600, fontFamily: 'Inter' }
                 }]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── CL Daily Search Traffic ─────────────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-cl-daily'));
+            const dates = [
+                'Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27',
+                'Mar 28','Mar 29','Mar 30','Mar 31','Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6','Apr 7'
+            ];
+            const clClicks = [2, 6, 2, 7, 6, 13, 18, 28, 48, 102, 92, 117, 139, 175, 139, 142, 154, 186, 482];
+            const caClicks = [921, 797, 856, 1005, 991, 999, 1020, 900, 782, 889, 898, 872, 800, 782, 778, 790, 809, 918, 2146];
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        params.forEach(p => { if (p.value != null) s += `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}</strong><br/>`; });
+                        return s;
+                    }
+                },
+                legend: { data: ['CL Clicks', 'CA Clicks'], textStyle: { color: '#64748b', fontSize: 11 }, top: 0 },
+                grid: { left: 55, right: 55, top: 40, bottom: 50 },
+                xAxis: {
+                    type: 'category', data: dates,
+                    axisLabel: { ...axisLabelStyle, rotate: 45, interval: 2, fontSize: 10 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: [
+                    { type: 'value', name: 'CL Clicks', nameTextStyle: { color: EMERALD, fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: splitLineStyle, axisLine: { show: false } },
+                    { type: 'value', name: 'CA Clicks', nameTextStyle: { color: BLUE, fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: { show: false }, axisLine: { show: false } }
+                ],
+                series: [
+                    {
+                        name: 'CL Clicks', type: 'bar', data: clClicks,
+                        itemStyle: { color: EMERALD, borderRadius: [3, 3, 0, 0] }, barWidth: '50%'
+                    },
+                    {
+                        name: 'CA Clicks', type: 'line', yAxisIndex: 1, data: caClicks,
+                        lineStyle: { color: BLUE, width: 2 }, itemStyle: { color: BLUE },
+                        symbol: 'circle', symbolSize: 4
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ── CL Weekly Search Traffic ───────────────────────────────
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-cl-weekly'));
+            // Week 1: Mar 20-26, Week 2: Mar 27-Apr 2, Week 3: Apr 3-7 (partial)
+            const weeks = ['W1\nMar 20-26', 'W2\nMar 27-Apr 2', 'W3\nApr 3-7'];
+            const clWeekly = [54, 573, 1103];
+            const clAvgDaily = [8, 82, 221];
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme, trigger: 'axis',
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel.replace('\n', ' ')}</strong><br/>`;
+                        params.forEach(p => {
+                            s += p.seriesName === 'Avg Daily'
+                                ? `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}/day</strong><br/>`
+                                : `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)} total</strong><br/>`;
+                        });
+                        return s;
+                    }
+                },
+                legend: { data: ['Weekly Total', 'Avg Daily'], textStyle: { color: '#64748b', fontSize: 11 }, top: 0 },
+                grid: { left: 55, right: 55, top: 40, bottom: 50 },
+                xAxis: {
+                    type: 'category', data: weeks,
+                    axisLabel: { ...axisLabelStyle, interval: 0, lineHeight: 16 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                yAxis: [
+                    { type: 'value', name: 'Total Clicks', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: splitLineStyle, axisLine: { show: false } },
+                    { type: 'value', name: 'Avg/Day', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: { show: false }, axisLine: { show: false } }
+                ],
+                series: [
+                    {
+                        name: 'Weekly Total', type: 'bar', data: clWeekly,
+                        itemStyle: { color: EMERALD, borderRadius: [4, 4, 0, 0] }, barWidth: '45%',
+                        label: { show: true, position: 'top', color: EMERALD, fontSize: 12, fontWeight: 600, fontFamily: 'JetBrains Mono', formatter: p => fmt(p.value) }
+                    },
+                    {
+                        name: 'Avg Daily', type: 'line', yAxisIndex: 1, data: clAvgDaily,
+                        lineStyle: { color: AMBER, width: 2.5 }, itemStyle: { color: AMBER },
+                        symbol: 'circle', symbolSize: 8,
+                        label: { show: true, position: 'top', color: AMBER, fontSize: 11, fontWeight: 600, formatter: p => p.value + '/day' }
+                    }
+                ]
             });
             window.addEventListener('resize', () => chart.resize());
         })();
