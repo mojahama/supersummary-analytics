@@ -1007,7 +1007,6 @@
         // ── CL Weekly Search Traffic ───────────────────────────────
         (() => {
             const chart = echarts.init(document.getElementById('chart-cl-weekly'));
-            // Week 1: Mar 20-26, Week 2: Mar 27-Apr 2, Week 3: Apr 3-7 (partial)
             const weeks = ['W1\nMar 20-26', 'W2\nMar 27-Apr 2', 'W3\nApr 3-7'];
             const clWeekly = [54, 573, 1103];
             const clAvgDaily = [8, 82, 221];
@@ -1016,39 +1015,34 @@
                 tooltip: {
                     ...tooltipTheme, trigger: 'axis',
                     formatter: (params) => {
-                        let s = `<strong>${params[0].axisValueLabel.replace('\n', ' ')}</strong><br/>`;
-                        params.forEach(p => {
-                            s += p.seriesName === 'Avg Daily'
-                                ? `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}/day</strong><br/>`
-                                : `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)} total</strong><br/>`;
-                        });
-                        return s;
+                        const p = params[0];
+                        const week = p.axisValueLabel.replace('\n', ' ');
+                        const avg = clAvgDaily[p.dataIndex];
+                        return `<strong>${week}</strong><br/>${p.marker} Total: <strong>${fmt(p.value)} clicks</strong><br/>Avg: <strong>${avg}/day</strong>`;
                     }
                 },
-                legend: { data: ['Weekly Total', 'Avg Daily'], textStyle: { color: '#64748b', fontSize: 11 }, top: 0 },
-                grid: { left: 55, right: 55, top: 40, bottom: 50 },
+                grid: { left: 55, right: 30, top: 30, bottom: 50 },
                 xAxis: {
                     type: 'category', data: weeks,
                     axisLabel: { ...axisLabelStyle, interval: 0, lineHeight: 16 },
                     axisLine: { lineStyle: { color: '#e2e8f0' } }
                 },
-                yAxis: [
-                    { type: 'value', name: 'Total Clicks', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: splitLineStyle, axisLine: { show: false } },
-                    { type: 'value', name: 'Avg/Day', nameTextStyle: { color: '#94a3b8', fontSize: 10 }, axisLabel: axisLabelStyle, splitLine: { show: false }, axisLine: { show: false } }
-                ],
-                series: [
-                    {
-                        name: 'Weekly Total', type: 'bar', data: clWeekly,
-                        itemStyle: { color: EMERALD, borderRadius: [4, 4, 0, 0] }, barWidth: '45%',
-                        label: { show: true, position: 'top', color: EMERALD, fontSize: 12, fontWeight: 600, fontFamily: 'JetBrains Mono', formatter: p => fmt(p.value) }
-                    },
-                    {
-                        name: 'Avg Daily', type: 'line', yAxisIndex: 1, data: clAvgDaily,
-                        lineStyle: { color: AMBER, width: 2.5 }, itemStyle: { color: AMBER },
-                        symbol: 'circle', symbolSize: 8,
-                        label: { show: true, position: 'top', color: AMBER, fontSize: 11, fontWeight: 600, formatter: p => p.value + '/day' }
+                yAxis: {
+                    type: 'value', name: 'Total Clicks',
+                    nameTextStyle: { color: '#94a3b8', fontSize: 10 },
+                    axisLabel: axisLabelStyle, splitLine: splitLineStyle, axisLine: { show: false }
+                },
+                series: [{
+                    type: 'bar', data: clWeekly,
+                    itemStyle: { color: EMERALD, borderRadius: [4, 4, 0, 0] }, barWidth: '45%',
+                    label: {
+                        show: true, position: 'top', fontSize: 12, fontWeight: 600,
+                        fontFamily: 'JetBrains Mono',
+                        formatter: p => fmt(p.value) + '\n{sub|' + clAvgDaily[p.dataIndex] + '/day}',
+                        rich: { sub: { fontSize: 10, color: AMBER, fontWeight: 600, fontFamily: 'JetBrains Mono', padding: [2, 0, 0, 0] } },
+                        color: EMERALD
                     }
-                ]
+                }]
             });
             window.addEventListener('resize', () => chart.resize());
         })();
