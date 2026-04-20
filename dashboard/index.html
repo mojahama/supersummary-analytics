@@ -104,7 +104,7 @@
             <div>
                 <p class="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-1">SuperSummary</p>
                 <h1 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Character Pages — Search & Product Analysis</h1>
-                <p class="text-sm text-slate-500 mt-1">Data as of April 5, 2026 &middot; CL pages indexed 17 days</p>
+                <p class="text-sm text-slate-500 mt-1">Refreshed April 20, 2026 &middot; CL pages indexed 31 days &middot; <a href="#apr17" class="text-ca font-medium hover:underline">Latest update &rarr;</a></p>
             </div>
             <div class="flex items-center gap-3">
                 <span class="badge badge-gsc">GSC</span>
@@ -112,6 +112,104 @@
                 <span class="badge badge-amp">Amplitude</span>
             </div>
         </header>
+
+        <!-- ═══════════ APR 17 UPDATE PANEL (NEW) ═══════════ -->
+        <section id="apr17" class="card p-6" style="background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); border-left: 3px solid #059669;">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="section-label" style="color: #059669; margin-bottom: 0;">Apr 20 Update</span>
+                <span class="badge" style="background: #d1fae5; color: #047857;">31 Days Post-Launch</span>
+                <span class="badge" style="background: #fef3c7; color: #b45309;">New all-time high Apr 19</span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">CL is compounding &mdash; a brand-new acquisition surface, big and still climbing</h2>
+            <p class="text-sm text-slate-500 mb-5">In 31 days CL went from 0 to a top-5 content type. Apr 19 was its biggest day yet (529 clicks). CTR is 2.4&times; site average; position is a full point ahead of site baseline.</p>
+
+            <!-- 5 hero metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">GSC Clicks (30d)</p>
+                    <p class="text-3xl font-mono font-bold text-cl">6,012</p>
+                    <p class="text-xs text-slate-500 mt-1">376/day last week &middot; <span class="text-green-700 font-semibold">new high 529 on Apr 19</span></p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">GA4 Sessions (30d)</p>
+                    <p class="text-3xl font-mono font-bold text-cl">24,834</p>
+                    <p class="text-xs text-slate-500 mt-1">1,459/day last week &middot; 67% organic</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Unique CL Users (Amplitude)</p>
+                    <p class="text-3xl font-mono font-bold text-cl">~40k</p>
+                    <p class="text-xs text-slate-500 mt-1">85% visitors &middot; 15% subscribers</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CL CTR vs Site</p>
+                    <p class="text-3xl font-mono font-bold text-cl">3.48%</p>
+                    <p class="text-xs text-slate-500 mt-1"><span class="text-green-700 font-semibold">2.4&times;</span> site avg (1.45%)</p>
+                </div>
+                <div class="evidence-card">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Avg Position</p>
+                    <p class="text-3xl font-mono font-bold text-cl">4.0</p>
+                    <p class="text-xs text-slate-500 mt-1">vs 5.2 site avg &middot; page-1 consistently</p>
+                </div>
+            </div>
+
+            <!-- Single chart: daily CL traffic, visitor + subscriber stacked -->
+            <div class="bg-white border border-slate-200 rounded-lg p-5">
+                <div class="flex items-start justify-between mb-1">
+                    <div>
+                        <div class="section-label">Overall CL Traffic &middot; Daily (Amplitude)</div>
+                        <h3 class="text-base font-semibold text-slate-900">Daily CL page views &mdash; visitors + subscribers</h3>
+                        <p class="text-xs text-slate-500 mt-1">Unique users per day viewing a CL page &middot; Mar 19 &ndash; Apr 16 &middot; trend line = 7-day rolling avg</p>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <p class="text-xs text-slate-400 font-mono uppercase tracking-wider">28d total unique users</p>
+                        <p class="text-2xl font-mono font-bold text-cl">36,658</p>
+                        <p class="text-xs text-slate-500">85% visitors &middot; 15% subscribers</p>
+                    </div>
+                </div>
+                <div id="chart-apr17-daily" style="height: 360px;"></div>
+                <p class="text-xs text-slate-500 mt-3"><strong class="text-slate-800">Caveats.</strong> Site-wide GSC clicks are <strong>−13% MoM</strong> (AI Overviews headwind). CA was declining before CL existed. CL-books are our hottest recent titles (selection bias) and April is peak student research season (seasonality) &mdash; so any CA/Summary halo on CL-books can't be cleanly attributed to CL. What we <em>can</em> say: CL adds a net new <strong>~4,900 GSC clicks</strong> and <strong>~21,200 GA4 sessions</strong> over 28 days that weren't there before, and <10% of CL's clicks come from queries where CA was competing.</p>
+            </div>
+
+            <!-- Top pages / queries -->
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 mt-5">
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Top CL Pages &middot; GSC Clicks (30d)</p>
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">shield-of-sparrows</span><span class="font-mono font-semibold text-slate-900">1,247</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">theo-of-golden</span><span class="font-mono font-semibold text-slate-900">418</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">the-correspondent</span><span class="font-mono font-semibold text-slate-900">333</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">anathema-keri-lake</span><span class="font-mono font-semibold text-slate-900">228</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">the-briar-club</span><span class="font-mono font-semibold text-slate-900">116</span></div>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Top Queries Driving CL</p>
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between gap-2"><span class="text-slate-700 truncate">shield of sparrows characters</span><span class="font-mono font-semibold text-slate-900">335</span></div>
+                        <div class="flex justify-between gap-2"><span class="text-slate-700 truncate">theo of golden characters</span><span class="font-mono font-semibold text-slate-900">66</span></div>
+                        <div class="flex justify-between gap-2"><span class="text-slate-700 truncate">theo of golden character list</span><span class="font-mono font-semibold text-slate-900">40</span></div>
+                        <div class="flex justify-between gap-2"><span class="text-slate-700 truncate">anathema characters</span><span class="font-mono font-semibold text-slate-900">25</span></div>
+                        <div class="flex justify-between gap-2"><span class="text-slate-700 truncate">dungeon crawler carl characters</span><span class="font-mono font-semibold text-slate-900">25</span></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3">"Shield of Sparrows" alone is 25% of CL clicks &middot; 9.3% CTR suggests no AIO on the query yet.</p>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Channel Mix &middot; GA4 (30d)</p>
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between"><span class="text-slate-700">Organic Search</span><span class="font-mono font-semibold text-slate-900">67.4%</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700">Direct</span><span class="font-mono font-semibold text-slate-900">12.9%</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700">Cross-network</span><span class="font-mono font-semibold text-slate-900">7.9%</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700">Paid Search</span><span class="font-mono font-semibold text-slate-900">4.5%</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700">Unassigned</span><span class="font-mono font-semibold text-slate-900">4.3%</span></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3">636 distinct CL URLs received GA4 traffic &middot; 74% engagement rate (Apr 1-16).</p>
+                </div>
+            </div>
+
+            <div class="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs text-slate-600 leading-relaxed">
+                <strong class="text-slate-900">Caveats.</strong> GA4 screenPageViews were zeroed pre-Apr 1 (tracking outage); sessions appear intact. Amplitude counts unique users per event, not raw pageviews &mdash; don't sum daily values for totals. First-week indirect conversion signal on CL (0.44%) matches site-wide visitor conversion; not yet enough to design a paywall A/B test. <strong class="text-slate-900">Recommendation unchanged:</strong> keep CL open-access while query volume continues compounding.
+            </div>
+        </section>
 
         <!-- ═══════════ METHODOLOGY & FRAMEWORK ═══════════ -->
         <section class="grid grid-cols-1 xl:grid-cols-2 gap-6">

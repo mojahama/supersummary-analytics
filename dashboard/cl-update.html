@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character List — Launch Update | SuperSummary</title>
+    <meta name="description" content="Character List 31-day launch update — traffic, channels, and growth through Apr 19, 2026.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cl: '#059669',
+                        clDark: '#047857',
+                        clLight: '#d1fae5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #ffffff;
+            color: #0f172a;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .hero-grad {
+            background:
+                radial-gradient(1200px 400px at 80% -10%, rgba(5,150,105,0.08), transparent 60%),
+                radial-gradient(900px 400px at 10% 110%, rgba(5,150,105,0.06), transparent 60%),
+                #fafafa;
+        }
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            transition: border-color 0.2s;
+        }
+        .stat-card:hover { border-color: #cbd5e1; }
+        .chart-container { width: 100%; }
+        .kbd {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 11px;
+            color: #475569;
+        }
+        .pulse-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 0 0 rgba(16,185,129,0.6);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+            100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+        }
+        @media print {
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="hero-grad">
+        <div class="max-w-[1200px] mx-auto px-6 pt-12 pb-10">
+            <!-- Nav / context bar -->
+            <div class="flex items-center justify-between mb-10 text-xs text-slate-500">
+                <div class="flex items-center gap-2">
+                    <span class="pulse-dot"></span>
+                    <span class="font-medium tracking-wide uppercase">Live — data through Apr 19, 2026</span>
+                </div>
+                <a href="./index.html" class="hover:text-slate-900 transition flex items-center gap-1">
+                    Full analysis
+                    <span class="text-slate-400">→</span>
+                </a>
+            </div>
+
+            <!-- Hero -->
+            <div class="mb-10">
+                <p class="text-xs font-semibold tracking-[0.2em] uppercase text-cl mb-3">SuperSummary · Character List</p>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05] max-w-4xl">
+                    From zero to a top content type in 31 days.
+                </h1>
+                <p class="mt-5 text-lg text-slate-600 max-w-3xl leading-relaxed">
+                    Character List pages launched March 20, 2026. As of April 19, they've generated <span class="font-semibold text-slate-900">6,012 Google clicks</span>, <span class="font-semibold text-slate-900">24,834 GA4 sessions</span>, and been seen by <span class="font-semibold text-slate-900">36,658 distinct users</span> — while clicking at <span class="font-semibold text-cl">2.4× the sitewide CTR</span> and holding an average Google position of <span class="font-semibold text-cl">4.0</span>.
+                </p>
+            </div>
+
+            <!-- Hero stats row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="stat-card p-5">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Google Clicks (31d)</p>
+                    <p class="text-4xl font-mono font-bold text-slate-900">6,012</p>
+                    <p class="text-xs text-slate-500 mt-2">↑ new daily high <span class="font-semibold text-cl">529</span> on Apr 19</p>
+                </div>
+                <div class="stat-card p-5">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">GA4 Sessions (31d)</p>
+                    <p class="text-4xl font-mono font-bold text-slate-900">24,834</p>
+                    <p class="text-xs text-slate-500 mt-2">1,459/day last week · 67% organic</p>
+                </div>
+                <div class="stat-card p-5">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">Distinct Users (28d)</p>
+                    <p class="text-4xl font-mono font-bold text-slate-900">36,658</p>
+                    <p class="text-xs text-slate-500 mt-2">85% visitors · 15% subscribers</p>
+                </div>
+                <div class="stat-card p-5">
+                    <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">CTR vs Site</p>
+                    <p class="text-4xl font-mono font-bold text-cl">2.4×</p>
+                    <p class="text-xs text-slate-500 mt-2">3.48% vs site 1.45% · avg position 4.0</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="max-w-[1200px] mx-auto px-6 py-12 space-y-10">
+
+        <!-- Hero chart (screenshot-friendly for PowerPoint) -->
+        <section class="stat-card p-6 md:p-8" id="hero-chart-card">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
+                <div>
+                    <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-1">Character Lists — traffic & subscriber engagement</p>
+                    <h2 class="text-2xl font-bold text-slate-900">Daily CL page views · visitors + subscribers</h2>
+                    <p class="text-sm text-slate-500 mt-1">Mar 20 → Apr 19, 2026 · GSC clicks overlaid on Amplitude unique-user views (stacked by audience).</p>
+                </div>
+            </div>
+            <div id="chart-hero" style="height: 460px;"></div>
+
+            <!-- Screenshot-friendly footer with URL + QR -->
+            <div class="mt-5 pt-5 border-t border-slate-200 flex items-center justify-between gap-4">
+                <div class="text-xs text-slate-500 leading-relaxed">
+                    <p class="font-semibold text-slate-700 mb-0.5">Full dashboard:</p>
+                    <p class="font-mono text-slate-900 text-sm">mojahama.github.io/supersummary-analytics/cl-update.html</p>
+                    <p class="mt-1 text-[11px]">Source: GSC · GA4 (prop 272381877) · Amplitude. Data through Apr 19, 2026.</p>
+                </div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=88x88&margin=0&data=https%3A%2F%2Fmojahama.github.io%2Fsupersummary-analytics%2Fcl-update.html" alt="QR to dashboard" class="w-[72px] h-[72px] shrink-0" />
+            </div>
+        </section>
+
+        <!-- Where CL traffic comes from -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="stat-card p-6 md:p-8">
+                <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-1">Who</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-4">Visitors and subscribers, both</h2>
+                <div class="space-y-3 mb-4">
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Visitors</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">33,506 <span class="text-xs text-slate-400">views · 85%</span></span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-cl" style="width: 85%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Subscribers</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">5,946 <span class="text-xs text-slate-400">views · 15%</span></span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-clDark" style="width: 15%;"></div></div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed">CL is primarily a <strong>top-of-funnel acquisition surface</strong>. 85% of views come from people who aren't subscribers — exactly where we need to play against the organic-search decline.</p>
+            </div>
+
+            <div class="stat-card p-6 md:p-8">
+                <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-1">How they arrive</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-4">Channel mix (GA4, 28d)</h2>
+                <div class="space-y-2.5">
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Organic Search</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">67.4%</span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-cl" style="width: 67.4%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Direct</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">12.9%</span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 12.9%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Cross-network (remarketing)</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">7.9%</span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 7.9%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Paid Search</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">4.5%</span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 4.5%;"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-sm font-medium text-slate-700">Referral / Email / Social</span>
+                            <span class="text-sm font-mono font-semibold text-slate-900">1.0%</span>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 1.0%;"></div></div>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 leading-relaxed mt-4">CL is more organic-heavy (67% vs 63% sitewide) and less direct (13% vs 18%) — it's pulling in people who don't already know us.</p>
+            </div>
+        </section>
+
+        <!-- Winners + queries -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="stat-card p-6 md:p-8">
+                <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-1">Top pages</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-4">Where CL is winning most</h2>
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">Shield of Sparrows</p>
+                            <p class="text-xs text-slate-500">4.82% CTR · position 3.7</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">1,247</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">Theo of Golden</p>
+                            <p class="text-xs text-slate-500">3.71% CTR · position 3.1</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">418</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">The Correspondent</p>
+                            <p class="text-xs text-slate-500">2.82% CTR · position 2.8</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">333</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">Anathema · Keri Lake</p>
+                            <p class="text-xs text-slate-500">7.58% CTR · position 2.8</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">228</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">The Briar Club</p>
+                            <p class="text-xs text-slate-500">4.77% CTR · position 2.9</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">116</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-4">Clicks over the last 30 days. <strong class="text-slate-700">636 distinct CL URLs</strong> received GA4 traffic in the period.</p>
+            </div>
+
+            <div class="stat-card p-6 md:p-8">
+                <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-1">Queries</p>
+                <h2 class="text-xl font-bold text-slate-900 mb-4">Intent we're now capturing</h2>
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">shield of sparrows characters</p>
+                            <p class="text-xs text-slate-500"><span class="kbd">9.3% CTR</span> &middot; no AI Overview yet</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">335</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">theo of golden characters</p>
+                            <p class="text-xs text-slate-500"><span class="kbd">10.5% CTR</span> &middot; position 3.9</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">66</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">theo of golden character list</p>
+                            <p class="text-xs text-slate-500"><span class="kbd">10.2% CTR</span> &middot; position 3.5</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">40</p>
+                    </div>
+                    <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">anathema character list</p>
+                            <p class="text-xs text-slate-500"><span class="kbd">39.1% CTR</span> &middot; position 1.0</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">25</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-semibold text-slate-900">dungeon crawler carl characters</p>
+                            <p class="text-xs text-slate-500"><span class="kbd">1.1% CTR</span> &middot; position 7.7</p>
+                        </div>
+                        <p class="text-lg font-mono font-bold text-cl">25</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-4"><strong class="text-slate-700">&lt;10% of CL's click volume</strong> comes from queries where CA was also ranking — these are new-intent queries CA wasn't serving.</p>
+            </div>
+        </section>
+
+        <!-- Key headline -->
+        <section class="stat-card p-8 md:p-10" style="background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 60%);">
+            <div class="max-w-3xl">
+                <p class="text-xs font-semibold tracking-widest uppercase text-cl mb-2">The takeaway</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 leading-tight mb-4">CL is a brand-new organic acquisition surface, shipped and scaling.</h2>
+                <p class="text-base text-slate-700 leading-relaxed mb-3">In 31 days, Character List went from zero search visibility to 6,012 Google clicks, 24,834 GA4 sessions, and ~40,000 unique users — while the rest of the site's organic traffic was <span class="text-slate-900 font-semibold">−13% MoM</span> under AI Overviews pressure.</p>
+                <p class="text-base text-slate-700 leading-relaxed">CL's CTR is <span class="font-semibold text-cl">2.4× the site average</span> and its average Google position (4.0) is a full point ahead of the site baseline. The top query ("shield of sparrows characters") has <span class="font-semibold text-cl">9.3% CTR</span> with no AI Overview — a sign that list-format content may be structurally more resilient than narrative essays in the AIO era.</p>
+            </div>
+        </section>
+
+        <!-- Caveats / transparency -->
+        <section class="border-t border-slate-200 pt-6">
+            <p class="text-xs font-semibold tracking-widest uppercase text-slate-500 mb-3">Honest caveats</p>
+            <ul class="text-sm text-slate-600 space-y-2 leading-relaxed">
+                <li>• <strong>Selection bias.</strong> CL pages were built on our most popular recent titles (Shield of Sparrows, Theo of Golden, The Correspondent). Some outperformance reflects those titles' inherent momentum, not CL per se.</li>
+                <li>• <strong>Seasonality.</strong> Late March → mid April is peak student research season. A portion of growth is calendar-driven.</li>
+                <li>• <strong>GA4 tracking gap.</strong> Site-wide GA4 was broken for ~1 month through early April. Apr 1+ sessions are clean; earlier totals undercount.</li>
+                <li>• <strong>Can't isolate a "CL halo" on sister pages.</strong> Summary/CA views on CL-books held up MoM vs site-wide −13%, but selection + seasonality explain most of that.</li>
+                <li>• <strong>Conversion signal is early.</strong> First measurable CL → Chargebee checkout rate: 0.44% (Apr 6 cohort, visitors) — matches site-wide visitor conversion. Not yet enough power for a paywall A/B test.</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-xs text-slate-400 pt-6 border-t border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+            <p>Sources: Google Search Console · GA4 property 272381877 · Amplitude (CL Dashboard <span class="kbd">njv9tx6s</span>).</p>
+            <p>Data pulled April 20, 2026 · <a href="./index.html" class="text-slate-600 hover:text-slate-900">Full analysis →</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const CL_GREEN = '#059669';
+        const CL_DARK = '#047857';
+        const GRAY = '#94a3b8';
+        const tooltipTheme = {
+            backgroundColor: '#0f172a',
+            borderColor: '#0f172a',
+            textStyle: { color: '#f1f5f9', fontSize: 12 },
+            extraCssText: 'border-radius: 8px; padding: 10px 12px;'
+        };
+        const axisLabel = { color: '#94a3b8', fontSize: 11 };
+        const splitLineStyle = { lineStyle: { color: '#f1f5f9' } };
+        const fmt = (n) => n == null ? '—' : new Intl.NumberFormat('en-US').format(n);
+
+        (() => {
+            const chart = echarts.init(document.getElementById('chart-hero'));
+            const dates = ['Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6','Apr 7','Apr 8','Apr 9','Apr 10','Apr 11','Apr 12','Apr 13','Apr 14','Apr 15','Apr 16','Apr 17','Apr 18','Apr 19'];
+            // Amplitude daily unique users — visitors
+            const visitors = [237,306,440,612,655,717,807,565,535,687,875,900,879,937,764,773,821,1204,1495,1730,1555,1341,1282,1570,1992,1960,1973,1868,1374,1230,1659];
+            // Amplitude daily unique users — subscribers
+            const subscribers = [88,78,94,216,176,183,192,119,100,140,192,208,226,158,141,107,161,274,291,326,256,196,163,212,336,289,281,258,178,144,251];
+            // GSC daily clicks
+            const clicks = [2,6,2,7,6,13,18,28,48,102,92,117,139,175,139,142,154,186,374,367,359,270,287,352,333,318,398,401,319,331,529];
+            // 7-day rolling avg of GSC clicks
+            const rolling = clicks.map((_, i) => {
+                const start = Math.max(0, i - 6);
+                const slice = clicks.slice(start, i + 1);
+                return Math.round(slice.reduce((a,b)=>a+b,0) / slice.length);
+            });
+
+            chart.setOption({
+                tooltip: {
+                    ...tooltipTheme,
+                    trigger: 'axis',
+                    axisPointer: { type: 'shadow' },
+                    formatter: (params) => {
+                        let s = `<strong>${params[0].axisValueLabel}</strong><br/>`;
+                        // Show stacked total first
+                        const vis = params.find(p => p.seriesName === 'Visitors');
+                        const sub = params.find(p => p.seriesName === 'Subscribers');
+                        if (vis && sub && vis.value != null && sub.value != null) {
+                            s += `<span style="color:#94a3b8">Total users:</span> <strong>${fmt(vis.value + sub.value)}</strong><br/>`;
+                        }
+                        params.forEach(p => {
+                            if (p.value != null) s += `${p.marker} ${p.seriesName}: <strong>${fmt(p.value)}</strong><br/>`;
+                        });
+                        return s;
+                    }
+                },
+                legend: {
+                    data: ['Visitors', 'Subscribers', 'Google clicks (7-day avg)'],
+                    textStyle: { color: '#475569', fontSize: 12 },
+                    top: 0,
+                    icon: 'circle'
+                },
+                grid: { left: 55, right: 60, top: 50, bottom: 60 },
+                xAxis: {
+                    type: 'category',
+                    data: dates,
+                    axisLabel: { ...axisLabel, rotate: 45, interval: 1, fontSize: 10 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } },
+                    axisTick: { alignWithLabel: true }
+                },
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: 'Unique users / day',
+                        nameTextStyle: { color: '#64748b', fontSize: 11, padding: [0,0,10,0] },
+                        axisLabel, splitLine: splitLineStyle,
+                        axisLine: { show: false }, axisTick: { show: false }
+                    },
+                    {
+                        type: 'value',
+                        name: 'Google clicks / day',
+                        nameTextStyle: { color: CL_DARK, fontSize: 11, padding: [0,0,10,0] },
+                        axisLabel, splitLine: { show: false },
+                        axisLine: { show: false }, axisTick: { show: false }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Visitors',
+                        type: 'bar',
+                        stack: 'users',
+                        yAxisIndex: 0,
+                        data: visitors,
+                        itemStyle: { color: '#86efac' },
+                        barWidth: '55%',
+                        z: 1
+                    },
+                    {
+                        name: 'Subscribers',
+                        type: 'bar',
+                        stack: 'users',
+                        yAxisIndex: 0,
+                        data: subscribers,
+                        itemStyle: { color: CL_DARK, borderRadius: [3,3,0,0] },
+                        barWidth: '55%',
+                        z: 1
+                    },
+                    {
+                        name: 'Google clicks (7-day avg)',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: rolling,
+                        smooth: true,
+                        lineStyle: { color: '#0f172a', width: 2.5 },
+                        itemStyle: { color: '#0f172a' },
+                        symbol: 'none',
+                        z: 3
+                    }
+                ]
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+    </script>
+</body>
+</html>
