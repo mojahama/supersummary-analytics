@@ -10,9 +10,9 @@
     "clViewsPerDayPriorWeek": 2090,
     "wowPct": 1.9,
     "vs4WeeksAgoMultiplier": 2.0,
-    "clClicks28d": 5111,
-    "clClicks28dNote": "Top 10 CL pages in GSC; total likely higher",
-    "clClicks28dPriorPeriod": 4773,
+    "clClicks28d": 8737,
+    "clClicks28dNote": "All 333 CL pages with GSC traffic (518 total indexed)",
+    "clClicks28dPriorPeriod": null,
     "clCaRatio": 0.32,
     "clCaRatioPriorWeek": 0.31,
     "summaryViewsPerDay": 49391,
@@ -32,7 +32,7 @@
     { "weekEnding": "2026-04-05", "amplitudeCL": 7456,   "amplitudeCA": 36258, "amplitudeSummary": 281603, "gscCLClicks": null, "ga4CLSessions": null },
     { "weekEnding": "2026-04-12", "amplitudeCL": 12360,  "amplitudeCA": 44704, "amplitudeSummary": 321080, "gscCLClicks": null, "ga4CLSessions": null },
     { "weekEnding": "2026-04-19", "amplitudeCL": 14368,  "amplitudeCA": 46017, "amplitudeSummary": 343235, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-04-26", "amplitudeCL": 15023,  "amplitudeCA": 47142, "amplitudeSummary": 345738, "gscCLClicks": 5111, "ga4CLSessions": null }
+    { "weekEnding": "2026-04-26", "amplitudeCL": 15023,  "amplitudeCA": 47142, "amplitudeSummary": 345738, "gscCLClicks": 8737, "ga4CLSessions": null }
   ],
   "topPages": {
     "gsc28d": [
