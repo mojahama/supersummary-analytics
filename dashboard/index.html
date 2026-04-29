@@ -113,6 +113,49 @@
             </div>
         </header>
 
+        <!-- ═══════════ WEEKLY PULSE (auto-updated every Wednesday) ═══════════ -->
+        <section id="weekly-pulse" class="card p-6" style="border-left: 3px solid #1e293b;">
+            <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
+                <div class="flex items-center gap-2">
+                    <span class="section-label" style="margin-bottom: 0;">Weekly Pulse</span>
+                    <span class="badge" style="background: #e2e8f0; color: #334155;" id="pulse-updated">Updated —</span>
+                    <span class="badge badge-gsc">GSC</span>
+                    <span class="badge badge-ga4">GA4</span>
+                    <span class="badge badge-amp">Amplitude</span>
+                </div>
+                <span class="text-xs text-slate-400 font-mono">auto-refreshed every Wed</span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">CL across all platforms &mdash; this week vs trend</h2>
+
+            <!-- KPI tiles -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">CL views / day</div>
+                    <div class="text-2xl font-bold text-slate-900 mt-1 font-mono" id="kpi-views">—</div>
+                    <div class="text-xs mt-1" id="kpi-views-wow">—</div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">CL clicks (28d, GSC)</div>
+                    <div class="text-2xl font-bold text-slate-900 mt-1 font-mono" id="kpi-clicks">—</div>
+                    <div class="text-xs mt-1 text-slate-500" id="kpi-clicks-note">top 10 CL pages</div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">CL / CA ratio</div>
+                    <div class="text-2xl font-bold text-slate-900 mt-1 font-mono" id="kpi-ratio">—</div>
+                    <div class="text-xs mt-1 text-slate-500">share of character traffic</div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">vs 4 weeks ago</div>
+                    <div class="text-2xl font-bold text-slate-900 mt-1 font-mono" id="kpi-multi">—</div>
+                    <div class="text-xs mt-1 text-slate-500">Amplitude views</div>
+                </div>
+            </div>
+
+            <!-- Weekly bar chart -->
+            <div id="chart-weekly-pulse" style="height: 360px;"></div>
+            <p class="text-xs text-slate-400 mt-2">Weeks are Mon–Sun, labeled by week-ending Sunday. Source: <code class="font-mono">dashboard/data/weekly-pulse.json</code>.</p>
+        </section>
+
         <!-- ═══════════ APR 17 UPDATE PANEL (NEW) ═══════════ -->
         <section id="apr17" class="card p-6" style="background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); border-left: 3px solid #059669;">
             <div class="flex items-center gap-2 mb-1">
@@ -1314,6 +1357,106 @@
                     ...tooltipTheme,
                     formatter: '{b}: {d}%'
                 }
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ─── Weekly Pulse (auto-updated) ───────────────────────────────
+        (async function () {
+            const el = document.getElementById('chart-weekly-pulse');
+            if (!el) return;
+            let data;
+            try {
+                const res = await fetch('data/weekly-pulse.json', { cache: 'no-store' });
+                data = await res.json();
+            } catch (e) {
+                el.innerHTML = '<div class="text-sm text-slate-500 p-4">Could not load weekly pulse data.</div>';
+                return;
+            }
+
+            // KPI tiles
+            const k = data.kpis || {};
+            const fmt = n => (n == null ? '—' : Number(n).toLocaleString());
+            const pct = n => (n == null ? '—' : (n >= 0 ? '+' : '') + n.toFixed(1) + '%');
+            document.getElementById('pulse-updated').textContent = 'Updated ' + (data.meta?.lastUpdated || '—');
+            document.getElementById('kpi-views').textContent = fmt(k.clViewsPerDay);
+            const wowEl = document.getElementById('kpi-views-wow');
+            if (k.wowPct != null) {
+                wowEl.textContent = pct(k.wowPct) + ' WoW';
+                wowEl.className = 'text-xs mt-1 ' + (k.wowPct >= 0 ? 'text-cl' : 'text-neg') + ' font-semibold';
+            }
+            document.getElementById('kpi-clicks').textContent = fmt(k.clClicks28d);
+            document.getElementById('kpi-clicks-note').textContent = k.clClicks28dNote || '';
+            document.getElementById('kpi-ratio').textContent = k.clCaRatio != null ? (k.clCaRatio * 100).toFixed(0) + '%' : '—';
+            document.getElementById('kpi-multi').textContent = k.vs4WeeksAgoMultiplier != null ? k.vs4WeeksAgoMultiplier.toFixed(1) + '×' : '—';
+
+            // Weekly chart — CL views (Amplitude), CL clicks (GSC), CL sessions (GA4)
+            const weeks = data.weekly || [];
+            const labels = weeks.map(w => w.weekEnding.slice(5));
+            const cl    = weeks.map(w => w.amplitudeCL ?? null);
+            const gsc   = weeks.map(w => w.gscCLClicks ?? null);
+            const ga4   = weeks.map(w => w.ga4CLSessions ?? null);
+
+            const chart = echarts.init(el);
+            chart.setOption({
+                grid: { left: 50, right: 60, top: 40, bottom: 50 },
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: { top: 0, textStyle: { fontSize: 12 } },
+                xAxis: {
+                    type: 'category',
+                    data: labels,
+                    name: 'Week ending',
+                    nameLocation: 'middle',
+                    nameGap: 32,
+                    axisLabel: { fontSize: 11 }
+                },
+                yAxis: [
+                    {
+                        type: 'value',
+                        name: 'Amplitude views',
+                        position: 'left',
+                        axisLabel: { fontSize: 11, formatter: v => v >= 1000 ? (v / 1000) + 'k' : v },
+                        splitLine: { lineStyle: { color: '#e2e8f0' } }
+                    },
+                    {
+                        type: 'value',
+                        name: 'GSC clicks / GA4 sessions',
+                        position: 'right',
+                        axisLabel: { fontSize: 11 },
+                        splitLine: { show: false }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'CL views (Amplitude)',
+                        type: 'bar',
+                        data: cl,
+                        itemStyle: { color: '#d97706' },
+                        barMaxWidth: 36
+                    },
+                    {
+                        name: 'CL clicks (GSC, 28d total)',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: gsc,
+                        itemStyle: { color: '#2563eb' },
+                        lineStyle: { width: 2 },
+                        symbol: 'circle',
+                        symbolSize: 8,
+                        connectNulls: false
+                    },
+                    {
+                        name: 'CL sessions (GA4)',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: ga4,
+                        itemStyle: { color: '#059669' },
+                        lineStyle: { width: 2, type: 'dashed' },
+                        symbol: 'circle',
+                        symbolSize: 8,
+                        connectNulls: false
+                    }
+                ]
             });
             window.addEventListener('resize', () => chart.resize());
         })();

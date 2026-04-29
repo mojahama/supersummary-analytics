@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "lastUpdated": "2026-04-29",
+    "lastUpdatedBy": "seed",
+    "weekDefinition": "ISO week, Monday–Sunday, labeled by week-ending Sunday",
+    "notes": "Seeded from Apr 29 cross-platform pull. GSC/GA4 weekly history begins accumulating once the scheduled agent runs."
+  },
+  "kpis": {
+    "clViewsPerDay": 2131,
+    "clViewsPerDayPriorWeek": 2090,
+    "wowPct": 1.9,
+    "vs4WeeksAgoMultiplier": 2.0,
+    "clClicks28d": 5111,
+    "clClicks28dNote": "Top 10 CL pages in GSC; total likely higher",
+    "clClicks28dPriorPeriod": 4773,
+    "clCaRatio": 0.32,
+    "clCaRatioPriorWeek": 0.31,
+    "summaryViewsPerDay": 49391,
+    "cannibalizationStatus": "none",
+    "topNewCLPage": {
+      "slug": "the-borrowed-life-of-frederick-fife/character-list",
+      "clicks28d": 129,
+      "ctr": 11.79,
+      "position": 2.3
+    }
+  },
+  "weekly": [
+    { "weekEnding": "2026-03-08", "amplitudeCL": 0,      "amplitudeCA": 44398, "amplitudeSummary": 326700, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-15", "amplitudeCL": 0,      "amplitudeCA": 42992, "amplitudeSummary": 326492, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-22", "amplitudeCL": 932,    "amplitudeCA": 49988, "amplitudeSummary": 349803, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-29", "amplitudeCL": 5973,   "amplitudeCA": 45484, "amplitudeSummary": 343484, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-05", "amplitudeCL": 7456,   "amplitudeCA": 36258, "amplitudeSummary": 281603, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-12", "amplitudeCL": 12360,  "amplitudeCA": 44704, "amplitudeSummary": 321080, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-19", "amplitudeCL": 14368,  "amplitudeCA": 46017, "amplitudeSummary": 343235, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-26", "amplitudeCL": 15023,  "amplitudeCA": 47142, "amplitudeSummary": 345738, "gscCLClicks": 5111, "ga4CLSessions": null }
+  ],
+  "topPages": {
+    "gsc28d": [
+      { "page": "shield-of-sparrows/character-list",                   "clicks": 2313, "impressions": 45019, "ctr": 5.14,  "position": 4.3 },
+      { "page": "theo-of-golden/character-list",                        "clicks": 743,  "impressions": 18134, "ctr": 4.10,  "position": 3.3 },
+      { "page": "the-correspondent/character-list",                     "clicks": 640,  "impressions": 19565, "ctr": 3.27,  "position": 3.3 },
+      { "page": "anathema-keri-lake/character-list",                    "clicks": 390,  "impressions": 4969,  "ctr": 7.85,  "position": 3.2 },
+      { "page": "butter-asako-yuzuki/character-list",                   "clicks": 204,  "impressions": 2086,  "ctr": 9.78,  "position": 3.0 },
+      { "page": "what-we-can-know/character-list",                      "clicks": 199,  "impressions": 1516,  "ctr": 13.13, "position": 2.7 },
+      { "page": "the-loneliness-of-sonia-and-sunny/character-list",     "clicks": 181,  "impressions": 2170,  "ctr": 8.34,  "position": 3.3 },
+      { "page": "the-briar-club/character-list",                        "clicks": 180,  "impressions": 2884,  "ctr": 6.24,  "position": 3.2 },
+      { "page": "dungeon-crawler-carl/character-list",                  "clicks": 132,  "impressions": 11192, "ctr": 1.18,  "position": 6.9 },
+      { "page": "the-borrowed-life-of-frederick-fife/character-list",   "clicks": 129,  "impressions": 1094,  "ctr": 11.79, "position": 2.3 }
+    ]
+  }
+}
