@@ -201,7 +201,7 @@
                     <div>
                         <div class="section-label">Overall CL Traffic &middot; Daily (Amplitude)</div>
                         <h3 class="text-base font-semibold text-slate-900">Daily CL page views &mdash; visitors + subscribers</h3>
-                        <p class="text-xs text-slate-500 mt-1">Unique users per day viewing a CL page &middot; Mar 19 &ndash; Apr 16 &middot; trend line = 7-day rolling avg</p>
+                        <p class="text-xs text-slate-500 mt-1">Daily CL page views &middot; Mar 19 &ndash; Apr 28 &middot; trend line = 7-day rolling avg</p>
                     </div>
                     <div class="text-right hidden md:block">
                         <p class="text-xs text-slate-400 font-mono uppercase tracking-wider">28d total unique users</p>
@@ -1357,6 +1357,54 @@
                     ...tooltipTheme,
                     formatter: '{b}: {d}%'
                 }
+            });
+            window.addEventListener('resize', () => chart.resize());
+        })();
+
+        // ─── Apr 17 panel: Daily CL traffic (Amplitude) ────────────────
+        (function () {
+            const el = document.getElementById('chart-apr17-daily');
+            if (!el) return;
+            const dates = ['Mar 18','Mar 19','Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 01','Apr 02','Apr 03','Apr 04','Apr 05','Apr 06','Apr 07','Apr 08','Apr 09','Apr 10','Apr 11','Apr 12','Apr 13','Apr 14','Apr 15','Apr 16','Apr 17','Apr 18','Apr 19','Apr 20','Apr 21','Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28'];
+            const views = [2,158,363,409,566,867,878,944,1034,726,664,860,1091,1177,1154,1125,970,919,1020,1557,1854,2137,1885,1593,1490,1844,2436,2393,2367,2201,1611,1406,1954,2543,2550,2360,2339,1851,1593,1787,2553,2431];
+            const rolling = views.map((_, i) => {
+                const start = Math.max(0, i - 6);
+                const slice = views.slice(start, i + 1);
+                return Math.round(slice.reduce((a, b) => a + b, 0) / slice.length);
+            });
+            const chart = echarts.init(el);
+            chart.setOption({
+                grid: { left: 50, right: 30, top: 30, bottom: 50 },
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: { top: 0, textStyle: { fontSize: 12 } },
+                xAxis: {
+                    type: 'category',
+                    data: dates,
+                    axisLabel: { fontSize: 10, interval: 2 }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { fontSize: 11, formatter: v => v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v },
+                    splitLine: { lineStyle: { color: '#e2e8f0' } }
+                },
+                series: [
+                    {
+                        name: 'Daily CL views',
+                        type: 'bar',
+                        data: views,
+                        itemStyle: { color: '#d1fae5', borderColor: '#059669', borderWidth: 1 },
+                        barMaxWidth: 18
+                    },
+                    {
+                        name: '7-day rolling avg',
+                        type: 'line',
+                        data: rolling,
+                        smooth: true,
+                        symbol: 'none',
+                        lineStyle: { color: '#059669', width: 2.5 },
+                        z: 5
+                    }
+                ]
             });
             window.addEventListener('resize', () => chart.resize());
         })();
