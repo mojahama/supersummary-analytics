@@ -62,6 +62,20 @@ From the daily Amplitude series:
 - `clClicks28d` = sum from Step 2
 - `clClicks28dPriorPeriod` = same query for the prior 28 days (use `mcp__gsc-mcp__compare_search_periods` with `period1_start/end` and `period2_start/end` set explicitly)
 
+## Step 4b — Engagement signals
+
+**Day-7 retention (CL vs CA):** Run two `mcp__Amplitude__query_dataset` retention queries with `metric: "retention"`, `retentionMethod: "nday"`, `nthTimeLookbackWindow: 365`, `range: "Last 30 Days"`. Start events: `View Guide Page - Character List` (CL) and `View Guide Page - Character` (CA). Return event: `_active`. Read index 7 of the `series[0].combined` array as Day-7. Compute `count / outof` for each, multiply by 100 to get a percentage. Set:
+- `kpis.engagement.day7ReturnCL` (1 dp)
+- `kpis.engagement.day7ReturnCA` (1 dp)
+- `kpis.engagement.day7ReturnRatio` = CL / CA, rounded to 1 dp
+
+**Top-page weighted CTR (CL vs CA):** From the GSC top-10 CL pages and top-10 CA pages (filter pages containing `/major-character-analysis/`), compute `sum(clicks) / sum(impressions) * 100`. Set:
+- `kpis.engagement.avgCtrTopCL` (1 dp)
+- `kpis.engagement.avgCtrTopCA` (1 dp)
+- `kpis.engagement.ctrRatio` = CL / CA, rounded to 1 dp
+
+If either source fails, leave the prior week's values in place rather than null — these change slowly and stale-but-real beats blank.
+
 ## Step 5 — Identify newest top CL page
 
 In the GSC top-10, flag a page whose position is < 3.5 AND wasn't in last week's JSON. Set `kpis.topNewCLPage` to `{slug, clicks28d, ctr, position}`. If none qualifies, keep prior week's value.

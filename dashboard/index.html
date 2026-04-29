@@ -151,6 +151,24 @@
                 </div>
             </div>
 
+            <!-- Engagement signals -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                <div class="bg-white border border-slate-200 rounded-lg p-4 flex items-center gap-4" style="border-left: 3px solid #d97706;">
+                    <div class="flex-1">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Day-7 return rate</div>
+                        <div class="text-lg font-bold text-slate-900 mt-0.5">CL viewers retain at <span class="text-warm font-mono" id="kpi-ret-ratio">—</span> the rate of CA viewers</div>
+                        <div class="text-xs text-slate-500 mt-0.5">CL <span class="font-mono font-semibold" id="kpi-ret-cl">—</span> &middot; CA <span class="font-mono font-semibold" id="kpi-ret-ca">—</span> &middot; Amplitude, last 30d</div>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4 flex items-center gap-4" style="border-left: 3px solid #2563eb;">
+                    <div class="flex-1">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Organic CTR on top pages</div>
+                        <div class="text-lg font-bold text-slate-900 mt-0.5">CL pages click at <span class="text-ca font-mono" id="kpi-ctr-ratio">—</span> the rate of CA pages</div>
+                        <div class="text-xs text-slate-500 mt-0.5">CL <span class="font-mono font-semibold" id="kpi-ctr-cl">—</span> &middot; CA <span class="font-mono font-semibold" id="kpi-ctr-ca">—</span> &middot; GSC, last 28d</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Weekly Amplitude bars -->
             <div class="mb-6">
                 <h3 class="text-sm font-semibold text-slate-700 mb-1">Weekly CL views &mdash; Amplitude</h3>
@@ -1390,6 +1408,16 @@
             document.getElementById('kpi-clicks-note').textContent = k.clClicks28dNote || '';
             document.getElementById('kpi-ratio').textContent = k.clCaRatio != null ? (k.clCaRatio * 100).toFixed(0) + '%' : '—';
             document.getElementById('kpi-multi').textContent = k.vs4WeeksAgoMultiplier != null ? k.vs4WeeksAgoMultiplier.toFixed(1) + '×' : '—';
+
+            // Engagement tiles
+            const e = k.engagement || {};
+            const setIf = (id, txt) => { const n = document.getElementById(id); if (n && txt) n.textContent = txt; };
+            if (e.day7ReturnRatio != null) setIf('kpi-ret-ratio', e.day7ReturnRatio.toFixed(1) + '×');
+            if (e.day7ReturnCL != null)   setIf('kpi-ret-cl', e.day7ReturnCL.toFixed(1) + '%');
+            if (e.day7ReturnCA != null)   setIf('kpi-ret-ca', e.day7ReturnCA.toFixed(1) + '%');
+            if (e.ctrRatio != null)       setIf('kpi-ctr-ratio', e.ctrRatio.toFixed(1) + '×');
+            if (e.avgCtrTopCL != null)    setIf('kpi-ctr-cl', e.avgCtrTopCL.toFixed(1) + '%');
+            if (e.avgCtrTopCA != null)    setIf('kpi-ctr-ca', e.avgCtrTopCA.toFixed(1) + '%');
 
             // Weekly chart — Amplitude CL views only (single axis). GSC/GA4 history
             // accumulates as the scheduled agent runs; until then they're shown as badges.

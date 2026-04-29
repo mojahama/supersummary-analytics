@@ -22,6 +22,16 @@
       "clicks28d": 129,
       "ctr": 11.79,
       "position": 2.3
+    },
+    "engagement": {
+      "day7ReturnCL": 4.1,
+      "day7ReturnCA": 2.3,
+      "day7ReturnRatio": 1.8,
+      "day7ReturnNote": "Last 30d, _active return event. CL viewers retain at 1.8× the CA baseline.",
+      "avgCtrTopCL": 5.1,
+      "avgCtrTopCA": 2.0,
+      "ctrRatio": 2.5,
+      "ctrNote": "Weighted CTR across top 10 CL pages vs top 10 CA pages, GSC last 28d."
     }
   },
   "weekly": [
