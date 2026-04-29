@@ -151,20 +151,26 @@
                 </div>
             </div>
 
-            <!-- Weekly bar chart -->
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-5">
-                <div>
-                    <h3 class="text-sm font-semibold text-slate-700 mb-1">Weekly &mdash; cross-platform</h3>
-                    <p class="text-xs text-slate-500 mb-2">Amplitude views (bars), GSC clicks (line), GA4 sessions (dashed) by week-ending Sunday.</p>
-                    <div id="chart-weekly-pulse" style="height: 320px;"></div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-semibold text-slate-700 mb-1">Daily &mdash; momentum (Amplitude)</h3>
-                    <p class="text-xs text-slate-500 mb-2">Daily CL views since launch &middot; trend line = 7-day rolling avg.</p>
-                    <div id="chart-daily-pulse" style="height: 320px;"></div>
+            <!-- Weekly Amplitude bars -->
+            <div class="mb-6">
+                <h3 class="text-sm font-semibold text-slate-700 mb-1">Weekly CL views &mdash; Amplitude</h3>
+                <p class="text-xs text-slate-500 mb-2">By week-ending Sunday. GSC + GA4 weekly history begins accumulating once the scheduled agent runs.</p>
+                <div id="chart-weekly-pulse" style="height: 300px;"></div>
+                <div class="flex flex-wrap gap-2 mt-3 text-xs">
+                    <span class="badge badge-amp">Amp views (last full wk): <span id="latest-amp" class="ml-1 font-mono">—</span></span>
+                    <span class="badge badge-gsc">GSC clicks (28d, all CL pages): <span id="latest-gsc" class="ml-1 font-mono">—</span></span>
+                    <span class="badge badge-ga4">GA4 sessions (last full wk): <span id="latest-ga4" class="ml-1 font-mono">pending</span></span>
                 </div>
             </div>
-            <p class="text-xs text-slate-400 mt-3">Weeks are Mon–Sun, labeled by week-ending Sunday. Source: <code class="font-mono">dashboard/data/weekly-pulse.json</code> &middot; daily series inlined for now (will move to JSON in next agent run).</p>
+
+            <!-- Daily momentum chart -->
+            <div>
+                <h3 class="text-sm font-semibold text-slate-700 mb-1">Daily CL views &mdash; momentum (Amplitude)</h3>
+                <p class="text-xs text-slate-500 mb-2">Daily CL views since launch &middot; trend line = 7-day rolling avg.</p>
+                <div id="chart-daily-pulse" style="height: 300px;"></div>
+            </div>
+
+            <p class="text-xs text-slate-400 mt-3">Source: <code class="font-mono">dashboard/data/weekly-pulse.json</code>. Daily series inlined for now (will move to JSON in next agent run).</p>
         </section>
 
         <!-- ═══════════ APR 17 UPDATE PANEL (NEW) ═══════════ -->
@@ -1385,18 +1391,23 @@
             document.getElementById('kpi-ratio').textContent = k.clCaRatio != null ? (k.clCaRatio * 100).toFixed(0) + '%' : '—';
             document.getElementById('kpi-multi').textContent = k.vs4WeeksAgoMultiplier != null ? k.vs4WeeksAgoMultiplier.toFixed(1) + '×' : '—';
 
-            // Weekly chart — CL views (Amplitude), CL clicks (GSC), CL sessions (GA4)
+            // Weekly chart — Amplitude CL views only (single axis). GSC/GA4 history
+            // accumulates as the scheduled agent runs; until then they're shown as badges.
             const weeks = data.weekly || [];
             const labels = weeks.map(w => w.weekEnding.slice(5));
             const cl    = weeks.map(w => w.amplitudeCL ?? null);
-            const gsc   = weeks.map(w => w.gscCLClicks ?? null);
-            const ga4   = weeks.map(w => w.ga4CLSessions ?? null);
+
+            // Latest-week metrics in badges
+            const latest = weeks[weeks.length - 1] || {};
+            const setBadge = (id, v) => { const n = document.getElementById(id); if (n && v != null) n.textContent = fmt(v); };
+            setBadge('latest-amp', latest.amplitudeCL);
+            setBadge('latest-gsc', latest.gscCLClicks);
+            if (latest.ga4CLSessions != null) setBadge('latest-ga4', latest.ga4CLSessions);
 
             const chart = echarts.init(el);
             chart.setOption({
-                grid: { left: 50, right: 60, top: 40, bottom: 50 },
+                grid: { left: 55, right: 20, top: 20, bottom: 50 },
                 tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                legend: { top: 0, textStyle: { fontSize: 12 } },
                 xAxis: {
                     type: 'category',
                     data: labels,
@@ -1405,51 +1416,19 @@
                     nameGap: 32,
                     axisLabel: { fontSize: 11 }
                 },
-                yAxis: [
-                    {
-                        type: 'value',
-                        name: 'Amplitude views',
-                        position: 'left',
-                        axisLabel: { fontSize: 11, formatter: v => v >= 1000 ? (v / 1000) + 'k' : v },
-                        splitLine: { lineStyle: { color: '#e2e8f0' } }
-                    },
-                    {
-                        type: 'value',
-                        name: 'GSC clicks / GA4 sessions',
-                        position: 'right',
-                        axisLabel: { fontSize: 11 },
-                        splitLine: { show: false }
-                    }
-                ],
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { fontSize: 11, formatter: v => v >= 1000 ? (v / 1000) + 'k' : v },
+                    splitLine: { lineStyle: { color: '#e2e8f0' } }
+                },
                 series: [
                     {
                         name: 'CL views (Amplitude)',
                         type: 'bar',
                         data: cl,
                         itemStyle: { color: '#d97706' },
-                        barMaxWidth: 36
-                    },
-                    {
-                        name: 'CL clicks (GSC, 28d total)',
-                        type: 'line',
-                        yAxisIndex: 1,
-                        data: gsc,
-                        itemStyle: { color: '#2563eb' },
-                        lineStyle: { width: 2 },
-                        symbol: 'circle',
-                        symbolSize: 8,
-                        connectNulls: false
-                    },
-                    {
-                        name: 'CL sessions (GA4)',
-                        type: 'line',
-                        yAxisIndex: 1,
-                        data: ga4,
-                        itemStyle: { color: '#059669' },
-                        lineStyle: { width: 2, type: 'dashed' },
-                        symbol: 'circle',
-                        symbolSize: 8,
-                        connectNulls: false
+                        label: { show: true, position: 'top', fontSize: 10, color: '#475569', formatter: p => p.value ? (p.value >= 1000 ? (p.value / 1000).toFixed(1) + 'k' : p.value) : '' },
+                        barMaxWidth: 44
                     }
                 ]
             });
