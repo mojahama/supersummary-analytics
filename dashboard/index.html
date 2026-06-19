@@ -113,6 +113,93 @@
             </div>
         </header>
 
+        <!-- ═══════════ Q2 OKR TRACKER (NEW) ═══════════ -->
+        <section id="okr-tracker" class="card p-6" style="border-left: 3px solid #dc2626;">
+            <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
+                <div class="flex items-center gap-2">
+                    <span class="section-label" style="margin-bottom: 0;">Q2 OKR Tracker</span>
+                    <span class="badge" style="background: #fee2e2; color: #b91c1c;">Both KRs at risk</span>
+                    <span class="badge badge-amp">Amplitude</span>
+                </div>
+                <span class="text-xs text-slate-400 font-mono">as of Jun 18, 2026 &middot; Character List = the only new content type</span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">New-content OKR &mdash; sessions &amp; conversion</h2>
+            <p class="text-sm text-slate-500 mb-5">Scope is <strong>Character List only</strong> (Book Club Questions is an established type, excluded). Both KRs read off the team's Amplitude charts.</p>
+
+            <!-- KR scorecards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                <div class="bg-white border border-slate-200 rounded-lg p-4" style="border-left: 3px solid #dc2626;">
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">KR1 &middot; Visitor sessions (L30D)</div>
+                        <span class="badge" style="background:#fee2e2;color:#b91c1c;">🔴 67% of goal</span>
+                    </div>
+                    <div class="text-3xl font-bold text-slate-900 font-mono">80,226 <span class="text-base text-slate-400">/ 120,000</span></div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden mt-2"><div class="h-full" style="width:67%;background:#dc2626;"></div></div>
+                    <div class="text-xs text-slate-500 mt-2">Rolling 30-day CL page views by non-subscribers. Source: <a class="text-cl hover:underline" href="https://app.amplitude.com/analytics/liftventures/chart/ihufr2g4" target="_blank">Amplitude ihufr2g4 &rarr;</a></div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4" style="border-left: 3px solid #dc2626;">
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">KR2 &middot; Direct conversion</div>
+                        <span class="badge" style="background:#fee2e2;color:#b91c1c;">🔴 0.06% vs 0.25%</span>
+                    </div>
+                    <div class="text-3xl font-bold text-slate-900 font-mono">0.06% <span class="text-base text-slate-400">/ 0.25%</span></div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden mt-2"><div class="h-full" style="width:24%;background:#dc2626;"></div></div>
+                    <div class="text-xs text-slate-500 mt-2">CL page &rarr; checkout (direct attribution). Source: <a class="text-cl hover:underline" href="https://app.amplitude.com/analytics/liftventures/chart/w5j3h9iq" target="_blank">Amplitude w5j3h9iq &rarr;</a></div>
+                </div>
+            </div>
+
+            <!-- Direct vs Indirect explainer -->
+            <div class="bg-white border border-slate-200 rounded-lg p-5">
+                <h3 class="text-sm font-semibold text-slate-700 mb-1">Reading the right conversion number: direct vs. indirect</h3>
+                <p class="text-xs text-slate-500 mb-4">KR2 means "did the CL page drive the purchase." Use the <strong>direct</strong> metric (checkout attributed to the CL page via <code class="font-mono">originPageSlug</code>). The <strong>indirect</strong> "converted anywhere within 24h" charts run ~5&times; higher because they credit the CL visit for any later checkout on any page &mdash; they are <em>not</em> the KR.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                    <div class="evidence-card" style="border-left:3px solid #dc2626;">
+                        <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Direct &mdash; the KR metric</p>
+                        <p class="text-2xl font-mono font-bold text-neg">~0.06%</p>
+                        <p class="text-xs text-slate-500 mt-1">CL page &rarr; checkout originating from CL. Spiked to 0.15% post-gating, never held.</p>
+                    </div>
+                    <div class="evidence-card" style="border-left:3px solid #94a3b8;">
+                        <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-1">Indirect &mdash; NOT the KR</p>
+                        <p class="text-2xl font-mono font-bold text-slate-500">~0.30%</p>
+                        <p class="text-xs text-slate-500 mt-1">Viewed CL &rarr; converted anywhere in 24h. Over-credits CL ~5&times;.</p>
+                    </div>
+                </div>
+                <div id="chart-cl-conversion" style="height: 320px;"></div>
+                <p class="text-xs text-slate-400 mt-2">Visitor segment, weekly. Direct = <a class="text-cl hover:underline" href="https://app.amplitude.com/analytics/liftventures/chart/w5j3h9iq" target="_blank">w5j3h9iq</a> &middot; Indirect = <a class="text-cl hover:underline" href="https://app.amplitude.com/analytics/liftventures/chart/6zuqorul" target="_blank">6zuqorul</a>.</p>
+            </div>
+        </section>
+        <script>
+        (function(){
+            var el = document.getElementById('chart-cl-conversion');
+            if(!el || typeof echarts === 'undefined') return;
+            var chart = echarts.init(el);
+            var weeks = ['Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27','May 4','May 11','May 18','May 25','Jun 1','Jun 8'];
+            var direct = [0.146,0.134,0.077,0.103,0.077,0.073,0.094,0.153,0.139,0.084,0.078,0.102,0.064];
+            var indirect = [0.739,0.436,0.524,0.342,0.525,0.400,0.425,0.350,0.429,0.244,0.346,0.348,0.296];
+            var target = weeks.map(function(){ return 0.25; });
+            chart.setOption({
+                tooltip: { trigger: 'axis', valueFormatter: function(v){ return v == null ? '—' : v.toFixed(3) + '%'; },
+                    backgroundColor:'#0f172a', borderColor:'#0f172a', textStyle:{color:'#f1f5f9',fontSize:12}, extraCssText:'border-radius:8px;' },
+                legend: { data: ['Direct (CL → checkout) — KR metric','Indirect (CL → converted anywhere)','KR target 0.25%'],
+                    top: 0, textStyle: { color: '#475569', fontSize: 12 }, icon: 'circle' },
+                grid: { left: 50, right: 20, top: 48, bottom: 52 },
+                xAxis: { type: 'category', data: weeks, axisLabel: { color: '#94a3b8', fontSize: 11, rotate: 45 },
+                    axisLine: { lineStyle: { color: '#e2e8f0' } }, axisTick: { alignWithLabel: true } },
+                yAxis: { type: 'value', axisLabel: { color: '#94a3b8', fontSize: 11, formatter: '{value}%' },
+                    splitLine: { lineStyle: { color: '#f1f5f9' } }, axisLine: { show: false }, axisTick: { show: false } },
+                series: [
+                    { name: 'Direct (CL → checkout) — KR metric', type: 'line', data: direct, smooth: true, symbol: 'circle', symbolSize: 6,
+                        lineStyle: { color: '#dc2626', width: 3 }, itemStyle: { color: '#dc2626' }, z: 3 },
+                    { name: 'Indirect (CL → converted anywhere)', type: 'line', data: indirect, smooth: true, symbol: 'none',
+                        lineStyle: { color: '#94a3b8', width: 2 }, itemStyle: { color: '#94a3b8' }, z: 2 },
+                    { name: 'KR target 0.25%', type: 'line', data: target, symbol: 'none',
+                        lineStyle: { color: '#059669', width: 1.5, type: 'dashed' }, itemStyle: { color: '#059669' }, z: 1 }
+                ]
+            });
+            window.addEventListener('resize', function(){ chart.resize(); });
+        })();
+        </script>
+
         <!-- ═══════════ WEEKLY PULSE (auto-updated every Wednesday) ═══════════ -->
         <section id="weekly-pulse" class="card p-6" style="border-left: 3px solid #1e293b;">
             <div class="flex items-center justify-between gap-3 flex-wrap mb-1">
