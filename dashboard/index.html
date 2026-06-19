@@ -148,6 +148,14 @@
                 </div>
             </div>
 
+            <!-- SEO: CL share of site organic -->
+            <div class="bg-white border border-slate-200 rounded-lg p-5 mb-3">
+                <h3 class="text-sm font-semibold text-slate-700 mb-1">KR1 in SEO terms: CL's share of site organic sessions</h3>
+                <p class="text-xs text-slate-500 mb-3">CL's share of the site's organic climbed from ~0% to <strong>5.6%</strong> (current run-rate <strong>5.26%</strong>). But the gray bars show the organic pie is <strong>shrinking</strong> (summer + AI Overviews) — so roughly half the share gain is the denominator falling, not CL climbing. CL's absolute organic flattened at ~12K/wk as impressions softened seasonally (CTR still rising — not a ranking slip).</p>
+                <div id="chart-cl-share" style="height: 340px;"></div>
+                <p class="text-xs text-slate-400 mt-2">GA4 organic sessions, by ISO week. First/last weeks partial. Site organic = all pages.</p>
+            </div>
+
             <!-- Direct vs Indirect explainer -->
             <div class="bg-white border border-slate-200 rounded-lg p-5">
                 <h3 class="text-sm font-semibold text-slate-700 mb-1">Reading the right conversion number: direct vs. indirect</h3>
@@ -194,6 +202,34 @@
                         lineStyle: { color: '#94a3b8', width: 2 }, itemStyle: { color: '#94a3b8' }, z: 2 },
                     { name: 'KR target 0.25%', type: 'line', data: target, symbol: 'none',
                         lineStyle: { color: '#059669', width: 1.5, type: 'dashed' }, itemStyle: { color: '#059669' }, z: 1 }
+                ]
+            });
+            window.addEventListener('resize', function(){ chart.resize(); });
+        })();
+        (function(){
+            var el = document.getElementById('chart-cl-share');
+            if(!el || typeof echarts === 'undefined') return;
+            var chart = echarts.init(el);
+            var labels = ['Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27','May 4','May 11','May 18','May 25','Jun 1','Jun 8','Jun 15'];
+            var shares = [0.06,0.35,1.41,2.46,2.66,2.83,3.06,3.32,3.82,4.68,4.92,5.11,5.64,5.80];
+            var siteorg = [232315,238666,211475,244368,268208,273771,274425,263679,283267,267888,247680,225386,221110,129238];
+            var clorg = [143,836,2980,6011,7132,7744,8411,8762,10826,12548,12190,11525,12481,7501];
+            chart.setOption({
+                tooltip: { trigger: 'axis', backgroundColor:'#0f172a', borderColor:'#0f172a', textStyle:{color:'#f1f5f9',fontSize:12}, extraCssText:'border-radius:8px;',
+                    formatter: function(p){ var s='<b>'+p[0].axisValueLabel+'</b><br/>'; p.forEach(function(x){
+                        if(x.seriesName.indexOf('share')>=0) s+=x.marker+' CL share: <b>'+x.value+'%</b> ('+clorg[x.dataIndex].toLocaleString()+' org sessions)<br/>';
+                        else s+=x.marker+' Site organic: <b>'+x.value.toLocaleString()+'</b><br/>'; }); return s; } },
+                legend: { data: ['CL share of site organic','Site organic sessions/wk'], top: 0, textStyle: { color:'#475569', fontSize:12 }, icon:'circle' },
+                grid: { left: 50, right: 60, top: 44, bottom: 44 },
+                xAxis: { type: 'category', data: labels, axisLabel: { color:'#94a3b8', fontSize:11, rotate:40 }, axisLine:{lineStyle:{color:'#e2e8f0'}} },
+                yAxis: [
+                    { type:'value', name:'CL share', axisLabel:{color:'#94a3b8',fontSize:11,formatter:'{value}%'}, nameTextStyle:{color:'#059669',fontSize:11}, splitLine:{lineStyle:{color:'#f1f5f9'}} },
+                    { type:'value', name:'Site organic/wk', axisLabel:{color:'#cbd5e1',fontSize:10,formatter:function(v){return (v/1000)+'k';}}, nameTextStyle:{color:'#cbd5e1',fontSize:10}, splitLine:{show:false} }
+                ],
+                series: [
+                    { name:'Site organic sessions/wk', type:'bar', yAxisIndex:1, data:siteorg, itemStyle:{color:'#eef2f6',borderRadius:[2,2,0,0]}, z:1, barWidth:'52%' },
+                    { name:'CL share of site organic', type:'line', yAxisIndex:0, data:shares, smooth:true, symbol:'circle', symbolSize:7, lineStyle:{color:'#059669',width:3}, itemStyle:{color:'#059669'}, z:3,
+                        markLine:{symbol:'none',label:{formatter:'5.26% current 28d',color:'#047857',fontSize:11},lineStyle:{color:'#059669',type:'dashed',opacity:.5},data:[{yAxis:5.26}]} }
                 ]
             });
             window.addEventListener('resize', function(){ chart.resize(); });
