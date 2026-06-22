@@ -1,61 +1,69 @@
 {
   "meta": {
-    "lastUpdated": "2026-04-29",
-    "lastUpdatedBy": "seed",
+    "lastUpdated": "2026-06-22",
+    "lastUpdatedBy": "claude",
     "weekDefinition": "ISO week, Monday–Sunday, labeled by week-ending Sunday",
-    "notes": "Seeded from Apr 29 cross-platform pull. GSC/GA4 weekly history begins accumulating once the scheduled agent runs."
+    "notes": "Updated Jun 22 2026. GSC 28d = May 25–Jun 21. Indexed = 1,635 pages reached GSC since Mar 20 launch (sitemaps outdated; Google discovered via crawl). Day-7 return rates from Apr 2026 — refresh pending."
   },
   "kpis": {
-    "clViewsPerDay": 2131,
-    "clViewsPerDayPriorWeek": 2090,
-    "wowPct": 1.9,
-    "vs4WeeksAgoMultiplier": 2.0,
-    "clClicks28d": 8737,
-    "clClicks28dNote": "All 333 CL pages with GSC traffic (518 total indexed)",
+    "clViewsPerDay": 2970,
+    "clViewsPerDayPriorWeek": 3117,
+    "wowPct": -4.7,
+    "vs4WeeksAgoMultiplier": 0.97,
+    "clClicks28d": 19526,
+    "clClicks28dNote": "1,505 CL pages · 28d impressions · 1,635 ever reached search",
     "clClicks28dPriorPeriod": null,
-    "clCaRatio": 0.32,
-    "clCaRatioPriorWeek": 0.31,
-    "summaryViewsPerDay": 49391,
+    "clCaRatio": 0.38,
+    "clCaRatioPriorWeek": 0.37,
+    "summaryViewsPerDay": null,
     "cannibalizationStatus": "none",
     "topNewCLPage": {
-      "slug": "the-borrowed-life-of-frederick-fife/character-list",
-      "clicks28d": 129,
-      "ctr": 11.79,
-      "position": 2.3
+      "slug": "theo-of-golden/character-list",
+      "clicks28d": 2089,
+      "ctr": 6.68,
+      "position": 3.6
     },
     "engagement": {
       "day7ReturnCL": 4.1,
       "day7ReturnCA": 2.3,
       "day7ReturnRatio": 1.8,
-      "day7ReturnNote": "Last 30d, _active return event. CL viewers retain at 1.8× the CA baseline.",
-      "avgCtrTopCL": 5.1,
-      "avgCtrTopCA": 2.0,
-      "ctrRatio": 2.5,
-      "ctrNote": "Weighted CTR across top 10 CL pages vs top 10 CA pages, GSC last 28d."
+      "day7ReturnNote": "Last 30d, _active return event. CL viewers retain at 1.8× the CA baseline. From Apr 2026 — refresh pending.",
+      "avgCtrTopCL": 5.93,
+      "avgCtrTopCA": 3.46,
+      "ctrRatio": 1.71,
+      "ctrNote": "Weighted CTR across top 10 CL pages vs top 10 CA pages, GSC May 25–Jun 21."
     }
   },
   "weekly": [
-    { "weekEnding": "2026-03-08", "amplitudeCL": 0,      "amplitudeCA": 44398, "amplitudeSummary": 326700, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-03-15", "amplitudeCL": 0,      "amplitudeCA": 42992, "amplitudeSummary": 326492, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-03-22", "amplitudeCL": 932,    "amplitudeCA": 49988, "amplitudeSummary": 349803, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-03-29", "amplitudeCL": 5973,   "amplitudeCA": 45484, "amplitudeSummary": 343484, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-04-05", "amplitudeCL": 7456,   "amplitudeCA": 36258, "amplitudeSummary": 281603, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-04-12", "amplitudeCL": 12360,  "amplitudeCA": 44704, "amplitudeSummary": 321080, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-04-19", "amplitudeCL": 14368,  "amplitudeCA": 46017, "amplitudeSummary": 343235, "gscCLClicks": null, "ga4CLSessions": null },
-    { "weekEnding": "2026-04-26", "amplitudeCL": 15023,  "amplitudeCA": 47142, "amplitudeSummary": 345738, "gscCLClicks": 8737, "ga4CLSessions": null }
+    { "weekEnding": "2026-03-08", "amplitudeCL": 0,     "amplitudeCA": 44398, "amplitudeSummary": 326700, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-15", "amplitudeCL": 0,     "amplitudeCA": 42992, "amplitudeSummary": 326492, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-22", "amplitudeCL": 932,   "amplitudeCA": 49988, "amplitudeSummary": 349803, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-03-29", "amplitudeCL": 5973,  "amplitudeCA": 45484, "amplitudeSummary": 343484, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-05", "amplitudeCL": 7456,  "amplitudeCA": 36258, "amplitudeSummary": 281603, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-12", "amplitudeCL": 12360, "amplitudeCA": 44704, "amplitudeSummary": 321080, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-19", "amplitudeCL": 14368, "amplitudeCA": 46017, "amplitudeSummary": 343235, "gscCLClicks": null, "ga4CLSessions": null },
+    { "weekEnding": "2026-04-26", "amplitudeCL": 15023, "amplitudeCA": 47142, "amplitudeSummary": 345738, "gscCLClicks": 8737,  "ga4CLSessions": null },
+    { "weekEnding": "2026-05-03", "amplitudeCL": 15037, "amplitudeCA": 44406, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-05-10", "amplitudeCL": 15939, "amplitudeCA": 44848, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-05-17", "amplitudeCL": 19655, "amplitudeCA": 49478, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-05-24", "amplitudeCL": 21433, "amplitudeCA": 43151, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-05-31", "amplitudeCL": 20410, "amplitudeCA": 40106, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-06-07", "amplitudeCL": 20445, "amplitudeCA": 36670, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-06-14", "amplitudeCL": 21821, "amplitudeCA": 36991, "amplitudeSummary": null,   "gscCLClicks": null,  "ga4CLSessions": null },
+    { "weekEnding": "2026-06-21", "amplitudeCL": 20794, "amplitudeCA": 33977, "amplitudeSummary": null,   "gscCLClicks": 19526, "ga4CLSessions": null }
   ],
   "topPages": {
     "gsc28d": [
-      { "page": "shield-of-sparrows/character-list",                   "clicks": 2313, "impressions": 45019, "ctr": 5.14,  "position": 4.3 },
-      { "page": "theo-of-golden/character-list",                        "clicks": 743,  "impressions": 18134, "ctr": 4.10,  "position": 3.3 },
-      { "page": "the-correspondent/character-list",                     "clicks": 640,  "impressions": 19565, "ctr": 3.27,  "position": 3.3 },
-      { "page": "anathema-keri-lake/character-list",                    "clicks": 390,  "impressions": 4969,  "ctr": 7.85,  "position": 3.2 },
-      { "page": "butter-asako-yuzuki/character-list",                   "clicks": 204,  "impressions": 2086,  "ctr": 9.78,  "position": 3.0 },
-      { "page": "what-we-can-know/character-list",                      "clicks": 199,  "impressions": 1516,  "ctr": 13.13, "position": 2.7 },
-      { "page": "the-loneliness-of-sonia-and-sunny/character-list",     "clicks": 181,  "impressions": 2170,  "ctr": 8.34,  "position": 3.3 },
-      { "page": "the-briar-club/character-list",                        "clicks": 180,  "impressions": 2884,  "ctr": 6.24,  "position": 3.2 },
-      { "page": "dungeon-crawler-carl/character-list",                  "clicks": 132,  "impressions": 11192, "ctr": 1.18,  "position": 6.9 },
-      { "page": "the-borrowed-life-of-frederick-fife/character-list",   "clicks": 129,  "impressions": 1094,  "ctr": 11.79, "position": 2.3 }
+      { "page": "theo-of-golden/character-list",        "clicks": 2089, "impressions": 31284, "ctr": 6.68,  "position": 3.6 },
+      { "page": "the-correspondent/character-list",     "clicks": 1318, "impressions": 23775, "ctr": 5.54,  "position": 3.8 },
+      { "page": "shield-of-sparrows/character-list",    "clicks": 922,  "impressions": 18298, "ctr": 5.04,  "position": 4.8 },
+      { "page": "when-the-moon-hatched/character-list", "clicks": 822,  "impressions": 24349, "ctr": 3.38,  "position": 5.2 },
+      { "page": "metal-slinger/character-list",         "clicks": 617,  "impressions": 8375,  "ctr": 7.37,  "position": 3.7 },
+      { "page": "direbound/character-list",             "clicks": 407,  "impressions": 8518,  "ctr": 4.78,  "position": 4.2 },
+      { "page": "dungeon-crawler-carl/character-list",  "clicks": 377,  "impressions": 17427, "ctr": 2.16,  "position": 7.4 },
+      { "page": "the-briar-club/character-list",        "clicks": 361,  "impressions": 3287,  "ctr": 10.98, "position": 3.2 },
+      { "page": "butter-asako-yuzuki/character-list",   "clicks": 262,  "impressions": 2476,  "ctr": 10.58, "position": 3.5 },
+      { "page": "anathema-keri-lake/character-list",    "clicks": 255,  "impressions": 4742,  "ctr": 5.38,  "position": 4.5 }
     ]
   }
 }

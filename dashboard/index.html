@@ -389,13 +389,13 @@
                 <div class="bg-white border border-slate-200 rounded-lg p-4">
                     <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">Top CL Pages &middot; GSC Clicks (28d)</p>
                     <div class="space-y-1.5 text-sm">
-                        <div class="flex justify-between"><span class="text-slate-700 truncate">theo-of-golden</span><span class="font-mono font-semibold text-slate-900">2,191</span></div>
-                        <div class="flex justify-between"><span class="text-slate-700 truncate">the-correspondent</span><span class="font-mono font-semibold text-slate-900">1,351</span></div>
-                        <div class="flex justify-between"><span class="text-slate-700 truncate">when-the-moon-hatched</span><span class="font-mono font-semibold text-slate-900">1,017</span></div>
-                        <div class="flex justify-between"><span class="text-slate-700 truncate">shield-of-sparrows</span><span class="font-mono font-semibold text-slate-900">979</span></div>
-                        <div class="flex justify-between"><span class="text-slate-700 truncate">metal-slinger</span><span class="font-mono font-semibold text-slate-900">550</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">theo-of-golden</span><span class="font-mono font-semibold text-slate-900">2,089</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">the-correspondent</span><span class="font-mono font-semibold text-slate-900">1,318</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">shield-of-sparrows</span><span class="font-mono font-semibold text-slate-900">922</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">when-the-moon-hatched</span><span class="font-mono font-semibold text-slate-900">822</span></div>
+                        <div class="flex justify-between"><span class="text-slate-700 truncate">metal-slinger</span><span class="font-mono font-semibold text-slate-900">617</span></div>
                     </div>
-                    <p class="text-xs text-slate-500 mt-3">theo-of-golden overtook a cooling shield-of-sparrows (1,759&rarr;979). <strong>1,000+ CL pages</strong> now earn clicks &mdash; growth is broadening to the long tail.</p>
+                    <p class="text-xs text-slate-500 mt-3">theo-of-golden leads; shield-of-sparrows cooling further. <strong>1,505 CL pages</strong> earned clicks in the last 28d (1,635 reached search since launch) &mdash; long tail broadening.</p>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-lg p-4">
                     <p class="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">SEO Contribution (28d)</p>
@@ -1624,8 +1624,8 @@
             // Daily Amplitude momentum chart (inlined data; agent can move to JSON later)
             const dailyEl = document.getElementById('chart-daily-pulse');
             if (dailyEl) {
-                const dates = ['Mar 18','Mar 19','Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 01','Apr 02','Apr 03','Apr 04','Apr 05','Apr 06','Apr 07','Apr 08','Apr 09','Apr 10','Apr 11','Apr 12','Apr 13','Apr 14','Apr 15','Apr 16','Apr 17','Apr 18','Apr 19','Apr 20','Apr 21','Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28'];
-                const views = [2,158,363,409,566,867,878,944,1034,726,664,860,1091,1177,1154,1125,970,919,1020,1557,1854,2137,1885,1593,1490,1844,2436,2393,2367,2201,1611,1406,1954,2543,2550,2360,2339,1851,1593,1787,2553,2431];
+                const dates = ['Mar 18','Mar 19','Mar 20','Mar 21','Mar 22','Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29','Mar 30','Mar 31','Apr 01','Apr 02','Apr 03','Apr 04','Apr 05','Apr 06','Apr 07','Apr 08','Apr 09','Apr 10','Apr 11','Apr 12','Apr 13','Apr 14','Apr 15','Apr 16','Apr 17','Apr 18','Apr 19','Apr 20','Apr 21','Apr 22','Apr 23','Apr 24','Apr 25','Apr 26','Apr 27','Apr 28','Apr 29','Apr 30','May 01','May 02','May 03','May 04','May 05','May 06','May 07','May 08','May 09','May 10','May 11','May 12','May 13','May 14','May 15','May 16','May 17','May 18','May 19','May 20','May 21','May 22','May 23','May 24','May 25','May 26','May 27','May 28','May 29','May 30','May 31','Jun 01','Jun 02','Jun 03','Jun 04','Jun 05','Jun 06','Jun 07','Jun 08','Jun 09','Jun 10','Jun 11','Jun 12','Jun 13','Jun 14','Jun 15','Jun 16','Jun 17','Jun 18','Jun 19','Jun 20','Jun 21'];
+                const views = [2,158,363,409,566,867,878,944,1034,726,664,860,1091,1177,1154,1125,970,919,1020,1557,1854,2137,1885,1593,1490,1844,2436,2393,2367,2201,1611,1406,1954,2543,2550,2360,2339,1851,1593,1787,2553,2431,2480,2273,1872,1487,1931,2651,2598,2773,2368,2009,1702,1838,3174,3148,3133,2959,2369,2042,2830,3822,3751,3615,3369,2346,2111,2419,2801,3365,3508,3165,2602,2325,2644,3258,3226,3198,3125,2503,2397,2738,3462,3631,3378,3101,2745,2466,3038,3437,3453,3172,3191,2634,2323,2584];
                 const rolling = views.map((_, i) => {
                     const start = Math.max(0, i - 6);
                     const slice = views.slice(start, i + 1);
