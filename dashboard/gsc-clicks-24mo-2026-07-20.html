@@ -13,6 +13,8 @@
     --line: #D3DBD9;
     --tag-bg: #1C7A7218;
     --tag-ink: #14554F;
+    --up: #1E7A46;
+    --down: #B23B3B;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -28,6 +30,8 @@
       --line: #29403B;
       --tag-bg: #3FC2B326;
       --tag-ink: #9EE9DE;
+      --up: #4FD88C;
+      --down: #F0938D;
     }
   }
   :root[data-theme="dark"] {
@@ -43,6 +47,8 @@
     --line: #29403B;
     --tag-bg: #3FC2B326;
     --tag-ink: #9EE9DE;
+    --up: #4FD88C;
+    --down: #F0938D;
   }
   :root[data-theme="light"] {
     --bg: #EEF2F1;
@@ -57,6 +63,8 @@
     --line: #D3DBD9;
     --tag-bg: #1C7A7218;
     --tag-ink: #14554F;
+    --up: #1E7A46;
+    --down: #B23B3B;
   }
 
   * { box-sizing: border-box; }
@@ -251,6 +259,22 @@
     margin-left: 6px;
     font-weight: 700;
   }
+  .yoy { font-family: ui-monospace, "SF Mono", monospace; text-align: right; font-weight: 600; }
+  .yoy.up { color: var(--up); }
+  .yoy.down { color: var(--down); }
+  .yoy.na { color: var(--ink-3); font-weight: 400; }
+  .yoy .fair-note { display: block; font-size: 9.5px; font-weight: 400; color: var(--ink-3); font-family: ui-sans-serif, sans-serif; }
+
+  .prose { font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+  .prose p { margin: 0 0 12px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--ink-1); }
+  .prose .stat-inline {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-1);
+    font-weight: 600;
+  }
 
   footer {
     color: var(--ink-3);
@@ -358,37 +382,53 @@
   <div class="panel">
     <div class="panel-head">
       <div class="panel-title">Monthly detail</div>
+      <div class="legend">
+        <span class="sw" style="color:var(--up)">▲ YoY up</span>
+        <span class="sw" style="color:var(--down)">▼ YoY down</span>
+      </div>
     </div>
     <div class="table-scroll">
       <table>
         <thead>
-          <tr><th>Month</th><th>Clicks</th><th>Impressions</th><th>CTR</th></tr>
+          <tr><th>Month</th><th>Clicks</th><th>YoY clicks</th><th>Impressions</th><th>YoY impr.</th><th>CTR</th></tr>
         </thead>
         <tbody>
-          <tr><td>Mar 2025 <span class="tag">partial</span></td><td class="num">1,187,954</td><td class="num">36,177,103</td><td class="num">3.28%</td></tr>
-          <tr><td>Apr 2025</td><td class="num">1,421,870</td><td class="num">49,865,063</td><td class="num">2.85%</td></tr>
-          <tr><td>May 2025</td><td class="num">1,312,328</td><td class="num">58,378,120</td><td class="num">2.25%</td></tr>
-          <tr><td>Jun 2025</td><td class="num">736,215</td><td class="num">36,887,545</td><td class="num">2.00%</td></tr>
-          <tr><td>Jul 2025</td><td class="num">589,881</td><td class="num">32,246,455</td><td class="num">1.83%</td></tr>
-          <tr><td>Aug 2025</td><td class="num">662,210</td><td class="num">35,695,264</td><td class="num">1.86%</td></tr>
-          <tr><td>Sep 2025</td><td class="num">805,561</td><td class="num">41,710,455</td><td class="num">1.93%</td></tr>
-          <tr><td>Oct 2025</td><td class="num">805,972</td><td class="num">38,181,718</td><td class="num">2.11%</td></tr>
-          <tr><td>Nov 2025</td><td class="num">695,816</td><td class="num">34,176,908</td><td class="num">2.04%</td></tr>
-          <tr><td>Dec 2025</td><td class="num">580,651</td><td class="num">34,263,534</td><td class="num">1.69%</td></tr>
-          <tr><td>Jan 2026</td><td class="num">849,311</td><td class="num">60,617,872</td><td class="num">1.40%</td></tr>
-          <tr><td>Feb 2026</td><td class="num">935,624</td><td class="num">68,714,335</td><td class="num">1.36%</td></tr>
-          <tr><td>Mar 2026</td><td class="num">1,020,716</td><td class="num">67,135,108</td><td class="num">1.52%</td></tr>
-          <tr><td>Apr 2026</td><td class="num">952,615</td><td class="num">59,063,425</td><td class="num">1.61%</td></tr>
-          <tr><td>May 2026</td><td class="num">990,486</td><td class="num">60,736,761</td><td class="num">1.63%</td></tr>
-          <tr><td>Jun 2026</td><td class="num">747,123</td><td class="num">43,176,409</td><td class="num">1.73%</td></tr>
-          <tr><td>Jul 2026 <span class="tag">partial</span></td><td class="num">445,479</td><td class="num">22,255,987</td><td class="num">2.00%</td></tr>
+          <tr><td>Mar 2025 <span class="tag">partial</span></td><td class="num">1,187,954</td><td class="yoy na">n/a</td><td class="num">36,177,103</td><td class="yoy na">n/a</td><td class="num">3.28%</td></tr>
+          <tr><td>Apr 2025</td><td class="num">1,421,870</td><td class="yoy na">n/a</td><td class="num">49,865,063</td><td class="yoy na">n/a</td><td class="num">2.85%</td></tr>
+          <tr><td>May 2025</td><td class="num">1,312,328</td><td class="yoy na">n/a</td><td class="num">58,378,120</td><td class="yoy na">n/a</td><td class="num">2.25%</td></tr>
+          <tr><td>Jun 2025</td><td class="num">736,215</td><td class="yoy na">n/a</td><td class="num">36,887,545</td><td class="yoy na">n/a</td><td class="num">2.00%</td></tr>
+          <tr><td>Jul 2025</td><td class="num">589,881</td><td class="yoy na">n/a</td><td class="num">32,246,455</td><td class="yoy na">n/a</td><td class="num">1.83%</td></tr>
+          <tr><td>Aug 2025</td><td class="num">662,210</td><td class="yoy na">n/a</td><td class="num">35,695,264</td><td class="yoy na">n/a</td><td class="num">1.86%</td></tr>
+          <tr><td>Sep 2025</td><td class="num">805,561</td><td class="yoy na">n/a</td><td class="num">41,710,455</td><td class="yoy na">n/a</td><td class="num">1.93%</td></tr>
+          <tr><td>Oct 2025</td><td class="num">805,972</td><td class="yoy na">n/a</td><td class="num">38,181,718</td><td class="yoy na">n/a</td><td class="num">2.11%</td></tr>
+          <tr><td>Nov 2025</td><td class="num">695,816</td><td class="yoy na">n/a</td><td class="num">34,176,908</td><td class="yoy na">n/a</td><td class="num">2.04%</td></tr>
+          <tr><td>Dec 2025</td><td class="num">580,651</td><td class="yoy na">n/a</td><td class="num">34,263,534</td><td class="yoy na">n/a</td><td class="num">1.69%</td></tr>
+          <tr><td>Jan 2026</td><td class="num">849,311</td><td class="yoy na">n/a</td><td class="num">60,617,872</td><td class="yoy na">n/a</td><td class="num">1.40%</td></tr>
+          <tr><td>Feb 2026</td><td class="num">935,624</td><td class="yoy na">n/a</td><td class="num">68,714,335</td><td class="yoy na">n/a</td><td class="num">1.36%</td></tr>
+          <tr><td>Mar 2026</td><td class="num">1,020,716</td><td class="yoy down">▼ 34.6%<span class="fair-note">vs Mar 8–31, 2025*</span></td><td class="num">67,135,108</td><td class="yoy up">▲ 40.9%<span class="fair-note">vs Mar 8–31, 2025*</span></td><td class="num">1.52%</td></tr>
+          <tr><td>Apr 2026</td><td class="num">952,615</td><td class="yoy down">▼ 33.0%</td><td class="num">59,063,425</td><td class="yoy up">▲ 18.4%</td><td class="num">1.61%</td></tr>
+          <tr><td>May 2026</td><td class="num">990,486</td><td class="yoy down">▼ 24.5%</td><td class="num">60,736,761</td><td class="yoy up">▲ 4.0%</td><td class="num">1.63%</td></tr>
+          <tr><td>Jun 2026</td><td class="num">747,123</td><td class="yoy up">▲ 1.5%</td><td class="num">43,176,409</td><td class="yoy up">▲ 17.0%</td><td class="num">1.73%</td></tr>
+          <tr><td>Jul 2026 <span class="tag">partial</span></td><td class="num">445,479</td><td class="yoy up">▲ 19.6%<span class="fair-note">vs Jul 1–20, 2025*</span></td><td class="num">22,255,987</td><td class="yoy up">▲ 7.9%<span class="fair-note">vs Jul 1–20, 2025*</span></td><td class="num">2.00%</td></tr>
         </tbody>
       </table>
+    </div>
+    <p style="font-size:11px;color:var(--ink-3);margin:10px 2px 0;">YoY only shown where a same-period prior-year comparator exists inside GSC's retention window (Aug 2025–Feb 2026 have none — their 2024 counterparts fall outside the ~16-month retention ceiling). *Mar 2026 and Jul 2026 are compared against the matching partial day-range in the prior year, not the full calendar month, so the comparison is apples-to-apples.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">Reading the trend: more impressions, fewer clicks</div>
+    </div>
+    <div class="prose">
+      <p>Two things are moving in opposite directions here, and neither is subtle. Monthly impressions roughly <strong>doubled</strong> from their mid-2025 trough (~<span class="stat-inline">32–42M</span>/month, Jun–Dec 2025) to <span class="stat-inline">60–69M</span>/month by Jan–May 2026 — and average ranking position improved at the same time, from roughly <span class="stat-inline">position 10–13</span> in mid-to-late 2025 to <span class="stat-inline">position 5–8</span> through 2026. Normally, better rankings plus more impressions should mean <em>more</em> clicks, not fewer. Instead, CTR compressed from <span class="stat-inline">~2.0–2.9%</span> in spring 2025 down to a floor of <span class="stat-inline">~1.36–1.40%</span> in Jan–Feb 2026 — and the YoY numbers above make the divergence explicit: March–May 2026 clicks are down <span class="stat-inline">25–35%</span> year-over-year in the same months impressions were up <span class="stat-inline">4–41%</span>.</p>
+      <p><strong>Is it AI Overviews?</strong> It's a plausible contributor, and the shape of the data fits: getting more visibility and better positions while earning proportionally fewer clicks is the textbook signature of a SERP feature absorbing attention before the user reaches organic results. It also matters that GSC's impression metric doesn't require a result to be scrolled to — a listing pushed further down the page by an AI Overview block still counts as a full impression even if far fewer real users ever scroll to it or click through, having already gotten an answer from the AI box. That said, I checked whether GSC breaks out AI Overview appearances directly (via the <code>searchAppearance</code> dimension) for this property, and it doesn't — the only appearance types reported are minor ones (translated results, product snippets, forums, video), none of which explain a swing this size. So this remains a well-supported hypothesis, not a confirmed cause; other contributors could include broader/less-intent-matched query mix as impressions grew, other SERP features (People Also Ask, more sitelinks), or algorithm changes independent of AI Overviews.</p>
+      <p>Worth flagging: the trend isn't monotonic. <strong>June and July 2026 show recovery</strong> — June clicks are flat-to-up YoY (+1.5%) despite impressions still climbing (+17%), and July (partial-month, apples-to-apples) is actually up on <em>both</em> clicks (+19.6%) and impressions (+7.9%), meaning CTR itself improved year-over-year for the first time in this dataset. Whatever suppressed CTR through the Sep 2025–Feb 2026 stretch may be easing, not permanently structural — worth re-checking again once August closes out.</p>
     </div>
   </div>
 
   <footer>
-    Source: Google Search Console, property <code>sc-domain:supersummary.com</code>, search type WEB, all pages (site-wide, no page/query filter). Pulled July 20, 2026. Data state: all (matches GSC dashboard; may include unconfirmed data from the last 2–3 days). GSC's retention ceiling (~16 months) is why this covers Mar 2025 → Jul 2026 rather than the full 24 months requested.
+    Source: Google Search Console, property <code>sc-domain:supersummary.com</code>, search type WEB, all pages (site-wide, no page/query filter). Pulled July 20, 2026. Data state: all (matches GSC dashboard; may include unconfirmed data from the last 2–3 days). GSC's retention ceiling (~16 months) is why this covers Mar 2025 → Jul 2026 rather than the full 24 months requested. Average position figures cited in the trend note are impression-weighted monthly averages computed from daily GSC data. <code>searchAppearance</code> breakdown checked 2026-07-20 — no distinct AI Overview category is reported for this property via the GSC API.
   </footer>
 </div>
 
