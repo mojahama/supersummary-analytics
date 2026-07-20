@@ -427,35 +427,86 @@
     </div>
   </div>
 
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">Is Character List behind the recovery?</div>
+      <div class="legend">
+        <span class="sw"><span class="chip"></span> full month</span>
+        <span class="sw"><span class="chip partial"></span> partial month</span>
+      </div>
+    </div>
+    <div class="prose" style="margin-bottom:14px;">
+      <p><strong>Character List</strong> (<code>/character-list/</code>) is a new content type launched <strong>March 20, 2026</strong> — it had zero GSC clicks or impressions for the entire Mar–Jul 2025 comparison window, confirmed against the raw data (the only <code>/character*/</code> pages ranking in 2025 were <code>/major-character-analysis/</code>). That makes its 2026 numbers cleanly incremental: there's no prior-year baseline to net out.</p>
+    </div>
+    <div class="chart-wrap" id="clChartWrap">
+      <svg class="chart" viewBox="0 0 860 220" role="img" aria-label="Character List monthly clicks since launch, March 2026 through July 2026">
+        <line x1="6" y1="186" x2="854" y2="186" stroke="var(--line)" stroke-width="1"/>
+        <g id="clBars">
+      <rect class="bar partial" x="6.00" y="182.61" width="153.60" height="3.39" rx="3" ry="3" tabindex="0" data-month="Mar '26 (from 20th)" data-clicks="441" data-impr="16,397" data-ctr="2.69%" data-partial="1"/>
+      <rect class="bar" x="179.60" y="110.08" width="153.60" height="75.92" rx="3" ry="3" tabindex="0" data-month="Apr '26" data-clicks="9,873" data-impr="256,507" data-ctr="3.85%" data-partial="0"/>
+      <rect class="bar" x="353.20" y="44.43" width="153.60" height="141.57" rx="3" ry="3" tabindex="0" data-month="May '26" data-clicks="18,411" data-impr="525,027" data-ctr="3.51%" data-partial="0"/>
+      <rect class="bar" x="526.80" y="16.85" width="153.60" height="169.15" rx="3" ry="3" tabindex="0" data-month="Jun '26" data-clicks="21,999" data-impr="544,316" data-ctr="4.04%" data-partial="0"/>
+      <rect class="bar partial" x="700.40" y="16.00" width="153.60" height="170.00" rx="3" ry="3" tabindex="0" data-month="Jul '26 (to 20th)" data-clicks="22,109" data-impr="501,622" data-ctr="4.41%" data-partial="1"/>
+        </g>
+        <g id="clLabels">
+      <text class="axis-label" x="82.80" y="202" text-anchor="middle">Mar '26*</text>
+      <text class="axis-label" x="256.40" y="202" text-anchor="middle">Apr '26</text>
+      <text class="axis-label" x="430.00" y="202" text-anchor="middle">May '26</text>
+      <text class="axis-label" x="603.60" y="202" text-anchor="middle">Jun '26</text>
+      <text class="axis-label" x="777.20" y="202" text-anchor="middle">Jul '26*</text>
+        </g>
+      </svg>
+      <div class="tooltip" id="clTooltip"></div>
+    </div>
+    <div class="table-scroll" style="margin-top:16px;">
+      <table>
+        <thead>
+          <tr><th>Month</th><th>CL clicks</th><th>CL impr.</th><th>CL CTR</th><th>Share of site clicks</th><th>Share of site's YoY swing</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mar 2026 <span class="tag">partial</span></td><td class="num">441</td><td class="num">16,397</td><td class="num">2.69%</td><td class="num">0.04%</td><td class="num" style="color:var(--ink-3)">−0.1% of −411K</td></tr>
+          <tr><td>Apr 2026</td><td class="num">9,873</td><td class="num">256,507</td><td class="num">3.85%</td><td class="num">1.04%</td><td class="num" style="color:var(--ink-3)">2.1% of −469K</td></tr>
+          <tr><td>May 2026</td><td class="num">18,411</td><td class="num">525,027</td><td class="num">3.51%</td><td class="num">1.86%</td><td class="num" style="color:var(--ink-3)">5.7% of −322K</td></tr>
+          <tr><td>Jun 2026</td><td class="num">21,999</td><td class="num">544,316</td><td class="num">4.04%</td><td class="num">2.94%</td><td class="num yoy up">202% of +11K</td></tr>
+          <tr><td>Jul 2026 <span class="tag">partial</span></td><td class="num">22,109</td><td class="num">501,622</td><td class="num">4.41%</td><td class="num">4.96%</td><td class="num yoy up">30% of +73K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top:14px;">
+      <p>Reading this straight: Character List was negligible while the site was in its worst YoY decline (Mar–Apr), a small-but-real contributor as the decline narrowed (May, ~6% of the gap), and by <strong>June</strong> — the first month site-wide clicks turned YoY-positive — CL's own incremental clicks (21,999) actually <em>exceed</em> the entire site's net YoY gain (+10,908). Strip CL out of June and the rest of the site was still down roughly 11K clicks year-over-year. In July, CL is a smaller share of a bigger recovery (~30% of +73K), meaning the rest of the site is now recovering too — but CL's own growth curve (0.04% → 4.96% of site clicks in five months, CTR holding at 2.7–4.4% versus the site's ~1.4–2.0%) is real, accelerating, and increasingly load-bearing for the headline trend.</p>
+    </div>
+  </div>
+
   <footer>
-    Source: Google Search Console, property <code>sc-domain:supersummary.com</code>, search type WEB, all pages (site-wide, no page/query filter). Pulled July 20, 2026. Data state: all (matches GSC dashboard; may include unconfirmed data from the last 2–3 days). GSC's retention ceiling (~16 months) is why this covers Mar 2025 → Jul 2026 rather than the full 24 months requested. Average position figures cited in the trend note are impression-weighted monthly averages computed from daily GSC data. <code>searchAppearance</code> breakdown checked 2026-07-20 — no distinct AI Overview category is reported for this property via the GSC API.
+    Source: Google Search Console, property <code>sc-domain:supersummary.com</code>, search type WEB, all pages (site-wide, no page/query filter). Pulled July 20, 2026. Data state: all (matches GSC dashboard; may include unconfirmed data from the last 2–3 days). GSC's retention ceiling (~16 months) is why this covers Mar 2025 → Jul 2026 rather than the full 24 months requested. Average position figures cited in the trend note are impression-weighted monthly averages computed from daily GSC data. <code>searchAppearance</code> breakdown checked 2026-07-20 — no distinct AI Overview category is reported for this property via the GSC API. Character List figures filtered to pages containing <code>/character-list/</code>; confirmed zero clicks/impressions for that URL pattern in the Mar–Jul 2025 comparison window (only <code>/major-character-analysis/</code> ranked under "character" pages in 2025), consistent with its Mar 20, 2026 launch.
   </footer>
 </div>
 
 <script>
-  const tooltip = document.getElementById('tooltip');
-  const wrap = document.getElementById('chartWrap');
-  document.querySelectorAll('.bar').forEach(bar => {
-    const show = (e) => {
-      const month = bar.getAttribute('data-month');
-      const clicks = bar.getAttribute('data-clicks');
-      const impr = bar.getAttribute('data-impr');
-      const ctr = bar.getAttribute('data-ctr');
-      const partial = bar.getAttribute('data-partial') === '1';
-      tooltip.innerHTML = `<b>${month}</b>${partial ? ' <span class="flag">· partial</span>' : ''}<br>${clicks} clicks · ${impr} impr · ${ctr} CTR`;
-      const wrapRect = wrap.getBoundingClientRect();
-      const barRect = bar.getBoundingClientRect();
-      const x = barRect.left - wrapRect.left + barRect.width / 2;
-      const y = barRect.top - wrapRect.top;
-      tooltip.style.left = x + 'px';
-      tooltip.style.top = y + 'px';
-      tooltip.classList.add('show');
-    };
-    const hide = () => tooltip.classList.remove('show');
-    bar.addEventListener('mouseenter', show);
-    bar.addEventListener('mousemove', show);
-    bar.addEventListener('mouseleave', hide);
-    bar.addEventListener('focus', show);
-    bar.addEventListener('blur', hide);
+  document.querySelectorAll('.chart-wrap').forEach(wrap => {
+    const tooltip = wrap.querySelector('.tooltip');
+    wrap.querySelectorAll('.bar').forEach(bar => {
+      const show = () => {
+        const month = bar.getAttribute('data-month');
+        const clicks = bar.getAttribute('data-clicks');
+        const impr = bar.getAttribute('data-impr');
+        const ctr = bar.getAttribute('data-ctr');
+        const partial = bar.getAttribute('data-partial') === '1';
+        tooltip.innerHTML = `<b>${month}</b>${partial ? ' <span class="flag">· partial</span>' : ''}<br>${clicks} clicks · ${impr} impr · ${ctr} CTR`;
+        const wrapRect = wrap.getBoundingClientRect();
+        const barRect = bar.getBoundingClientRect();
+        const x = barRect.left - wrapRect.left + barRect.width / 2;
+        const y = barRect.top - wrapRect.top;
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+        tooltip.classList.add('show');
+      };
+      const hide = () => tooltip.classList.remove('show');
+      bar.addEventListener('mouseenter', show);
+      bar.addEventListener('mousemove', show);
+      bar.addEventListener('mouseleave', hide);
+      bar.addEventListener('focus', show);
+      bar.addEventListener('blur', hide);
+    });
   });
 </script>
