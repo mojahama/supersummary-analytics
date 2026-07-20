@@ -73,6 +73,8 @@
     background: var(--bg);
     color: var(--ink-1);
     font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
   .page {
@@ -84,7 +86,7 @@
     gap: 28px;
   }
   .eyebrow {
-    font-size: 11.5px;
+    font-size: 12.5px;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--accent);
@@ -99,10 +101,10 @@
   }
   .subhead {
     margin-top: 8px;
-    color: var(--ink-2);
-    font-size: 14.5px;
-    line-height: 1.55;
-    max-width: 62ch;
+    color: var(--ink-1);
+    font-size: 16.5px;
+    line-height: 1.65;
+    max-width: 66ch;
   }
   .subhead code {
     font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
@@ -119,9 +121,9 @@
     background: var(--tag-bg);
     border: 1px solid var(--line);
     border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 13px;
-    line-height: 1.5;
+    padding: 14px 16px;
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--ink-2);
   }
   .callout .dot {
@@ -150,7 +152,7 @@
     gap: 6px;
   }
   .stat .label {
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink-3);
@@ -159,12 +161,12 @@
   .stat .value {
     font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
     font-variant-numeric: tabular-nums;
-    font-size: clamp(19px, 2.6vw, 25px);
+    font-size: clamp(20px, 2.6vw, 26px);
     font-weight: 600;
     letter-spacing: -0.01em;
   }
   .stat .sub {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-3);
   }
 
@@ -183,14 +185,14 @@
     flex-wrap: wrap;
   }
   .panel-title {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
   }
   .legend {
     display: flex;
     align-items: center;
     gap: 14px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-3);
   }
   .legend .sw { display: inline-flex; align-items: center; gap: 6px; }
@@ -203,7 +205,7 @@
   .bar:hover, .bar:focus { fill: var(--accent); outline: none; }
   .bar.partial { fill: var(--accent-fill-partial); stroke-dasharray: 3 2; }
   .bar.partial:hover, .bar.partial:focus { fill: var(--accent-fill); }
-  .axis-label { font-size: 10.5px; fill: var(--ink-3); font-family: ui-monospace, "SF Mono", monospace; }
+  .axis-label { font-size: 12px; fill: var(--ink-2); font-family: ui-monospace, "SF Mono", monospace; }
   .axis-label.year-tick { fill: var(--ink-2); font-weight: 600; }
 
   .tooltip {
@@ -211,8 +213,8 @@
     pointer-events: none;
     background: var(--ink-1);
     color: var(--bg);
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 13.5px;
+    line-height: 1.55;
     padding: 8px 10px;
     border-radius: 8px;
     transform: translate(-50%, -110%);
@@ -229,27 +231,27 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 14.5px;
     font-variant-numeric: tabular-nums;
   }
   table th {
     text-align: right;
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ink-3);
     font-weight: 600;
-    padding: 8px 6px;
+    padding: 9px 6px;
     border-bottom: 1px solid var(--line);
   }
   table th:first-child, table td:first-child { text-align: left; }
-  table td { padding: 7px 6px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  table td { padding: 8px 6px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
   table td.num { text-align: right; font-family: ui-monospace, "SF Mono", monospace; color: var(--ink-1); }
   table tr:last-child td { border-bottom: none; }
   .table-scroll { overflow-x: auto; }
   .tag {
     display: inline-block;
-    font-size: 10px;
+    font-size: 10.5px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     background: var(--tag-bg);
@@ -263,9 +265,9 @@
   .yoy.up { color: var(--up); }
   .yoy.down { color: var(--down); }
   .yoy.na { color: var(--ink-3); font-weight: 400; }
-  .yoy .fair-note { display: block; font-size: 9.5px; font-weight: 400; color: var(--ink-3); font-family: ui-sans-serif, sans-serif; }
+  .yoy .fair-note { display: block; font-size: 10.5px; font-weight: 400; color: var(--ink-3); font-family: ui-sans-serif, sans-serif; }
 
-  .prose { font-size: 14px; line-height: 1.7; color: var(--ink-2); }
+  .prose { font-size: 16.5px; line-height: 1.75; color: var(--ink-1); }
   .prose p { margin: 0 0 12px; }
   .prose p:last-child { margin-bottom: 0; }
   .prose strong { color: var(--ink-1); }
@@ -278,8 +280,8 @@
 
   footer {
     color: var(--ink-3);
-    font-size: 12px;
-    line-height: 1.6;
+    font-size: 13.5px;
+    line-height: 1.65;
     border-top: 1px solid var(--line);
     padding-top: 16px;
   }
@@ -413,7 +415,7 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:11px;color:var(--ink-3);margin:10px 2px 0;">YoY only shown where a same-period prior-year comparator exists inside GSC's retention window (Aug 2025–Feb 2026 have none — their 2024 counterparts fall outside the ~16-month retention ceiling). *Mar 2026 and Jul 2026 are compared against the matching partial day-range in the prior year, not the full calendar month, so the comparison is apples-to-apples.</p>
+    <p style="font-size:12.5px;line-height:1.55;color:var(--ink-3);margin:10px 2px 0;">YoY only shown where a same-period prior-year comparator exists inside GSC's retention window (Aug 2025–Feb 2026 have none — their 2024 counterparts fall outside the ~16-month retention ceiling). *Mar 2026 and Jul 2026 are compared against the matching partial day-range in the prior year, not the full calendar month, so the comparison is apples-to-apples.</p>
   </div>
 
   <div class="panel">
