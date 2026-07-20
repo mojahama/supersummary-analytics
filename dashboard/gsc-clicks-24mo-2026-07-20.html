@@ -1,0 +1,421 @@
+<title>GSC Organic Clicks — Trailing Report</title>
+<style>
+  :root {
+    --bg: #EEF2F1;
+    --surface: #FFFFFF;
+    --surface-2: #E4E9E8;
+    --ink-1: #14201D;
+    --ink-2: #48605B;
+    --ink-3: #7C918C;
+    --accent: #1C7A72;
+    --accent-fill: #1C7A7226;
+    --accent-fill-partial: #1C7A7212;
+    --line: #D3DBD9;
+    --tag-bg: #1C7A7218;
+    --tag-ink: #14554F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10161A;
+      --surface: #182320;
+      --surface-2: #1E2B27;
+      --ink-1: #EAF2EF;
+      --ink-2: #9FB6B0;
+      --ink-3: #6C8480;
+      --accent: #3FC2B3;
+      --accent-fill: #3FC2B32E;
+      --accent-fill-partial: #3FC2B316;
+      --line: #29403B;
+      --tag-bg: #3FC2B326;
+      --tag-ink: #9EE9DE;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10161A;
+    --surface: #182320;
+    --surface-2: #1E2B27;
+    --ink-1: #EAF2EF;
+    --ink-2: #9FB6B0;
+    --ink-3: #6C8480;
+    --accent: #3FC2B3;
+    --accent-fill: #3FC2B32E;
+    --accent-fill-partial: #3FC2B316;
+    --line: #29403B;
+    --tag-bg: #3FC2B326;
+    --tag-ink: #9EE9DE;
+  }
+  :root[data-theme="light"] {
+    --bg: #EEF2F1;
+    --surface: #FFFFFF;
+    --surface-2: #E4E9E8;
+    --ink-1: #14201D;
+    --ink-2: #48605B;
+    --ink-3: #7C918C;
+    --accent: #1C7A72;
+    --accent-fill: #1C7A7226;
+    --accent-fill-partial: #1C7A7212;
+    --line: #D3DBD9;
+    --tag-bg: #1C7A7218;
+    --tag-ink: #14554F;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink-1);
+    font-family: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  h1 {
+    margin: 6px 0 0;
+    font-size: clamp(26px, 4vw, 34px);
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .subhead {
+    margin-top: 8px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+    line-height: 1.55;
+    max-width: 62ch;
+  }
+  .subhead code {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
+    font-size: 0.92em;
+    background: var(--surface-2);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .callout {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--tag-bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .callout .dot {
+    flex: none;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+  .callout strong { color: var(--ink-1); }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--surface);
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat .label {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+  }
+  .stat .value {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(19px, 2.6vw, 25px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .stat .sub {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 22px 14px;
+  }
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .panel-title {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .legend .sw { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .chip { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+  .legend .chip.partial { background: transparent; border: 1.5px dashed var(--accent); }
+
+  .chart-wrap { position: relative; }
+  svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .bar { fill: var(--accent-fill); stroke: var(--accent); stroke-width: 1.3; cursor: pointer; transition: fill 0.12s ease; }
+  .bar:hover, .bar:focus { fill: var(--accent); outline: none; }
+  .bar.partial { fill: var(--accent-fill-partial); stroke-dasharray: 3 2; }
+  .bar.partial:hover, .bar.partial:focus { fill: var(--accent-fill); }
+  .axis-label { font-size: 10.5px; fill: var(--ink-3); font-family: ui-monospace, "SF Mono", monospace; }
+  .axis-label.year-tick { fill: var(--ink-2); font-weight: 600; }
+
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--ink-1);
+    color: var(--bg);
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transform: translate(-50%, -110%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    z-index: 5;
+    font-family: ui-monospace, "SF Mono", monospace;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip b { font-family: ui-sans-serif, sans-serif; font-weight: 700; }
+  .tooltip .flag { color: #E8C15A; font-weight: 700; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+  table th {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 600;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  table th:first-child, table td:first-child { text-align: left; }
+  table td { padding: 7px 6px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  table td.num { text-align: right; font-family: ui-monospace, "SF Mono", monospace; color: var(--ink-1); }
+  table tr:last-child td { border-bottom: none; }
+  .table-scroll { overflow-x: auto; }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--tag-bg);
+    color: var(--tag-ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-weight: 700;
+  }
+
+  footer {
+    color: var(--ink-3);
+    font-size: 12px;
+    line-height: 1.6;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<div class="page">
+  <div>
+    <div class="eyebrow">Search Console · sc-domain:supersummary.com</div>
+    <h1>Organic search clicks, all pages</h1>
+    <p class="subhead">Requested a trailing 24-month window (<code>2024-07-20</code> → <code>2026-07-20</code>). Search Console only returned data starting <code>2025-03-08</code> — Google Search Console retains roughly 16 months of history, so this report covers what's actually available: <strong style="color:var(--ink-1)">16.4 months</strong>, not 24.</p>
+  </div>
+
+  <div class="callout">
+    <span class="dot"></span>
+    <div><strong>Data availability note:</strong> the requested start date (Jul 2024) predates what GSC retains. The earliest row returned is March 8, 2025. March 2025 and July 2026 are partial calendar months (data starts mid-March; the report was pulled July 20, so July is cut short) — both are flagged in the chart and table below.</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="label">Total clicks</div>
+      <div class="value">14,739,812</div>
+      <div class="sub">Mar 8, 2025 – Jul 20, 2026</div>
+    </div>
+    <div class="stat">
+      <div class="label">Total impressions</div>
+      <div class="value">779,282,062</div>
+      <div class="sub">same window</div>
+    </div>
+    <div class="stat">
+      <div class="label">Blended CTR</div>
+      <div class="value">1.89%</div>
+      <div class="sub">clicks ÷ impressions</div>
+    </div>
+    <div class="stat">
+      <div class="label">Peak month</div>
+      <div class="value">1,421,870</div>
+      <div class="sub">April 2025</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">Monthly clicks</div>
+      <div class="legend">
+        <span class="sw"><span class="chip"></span> full month</span>
+        <span class="sw"><span class="chip partial"></span> partial month</span>
+      </div>
+    </div>
+    <div class="chart-wrap" id="chartWrap">
+      <svg class="chart" viewBox="0 0 860 300" role="img" aria-label="Monthly organic clicks, March 2025 through July 2026">
+        <line x1="6" y1="266" x2="854" y2="266" stroke="var(--line)" stroke-width="1"/>
+        <g id="bars">
+      <rect class="bar partial" x="6.00" y="57.13" width="42.35" height="208.87" rx="3" ry="3" tabindex="0" data-month="Mar 2025" data-clicks="1,187,954" data-impr="36,177,103" data-ctr="3.28%" data-partial="1"/>
+      <rect class="bar" x="56.35" y="16.00" width="42.35" height="250.00" rx="3" ry="3" tabindex="0" data-month="Apr 2025" data-clicks="1,421,870" data-impr="49,865,063" data-ctr="2.85%" data-partial="0"/>
+      <rect class="bar" x="106.71" y="35.26" width="42.35" height="230.74" rx="3" ry="3" tabindex="0" data-month="May 2025" data-clicks="1,312,328" data-impr="58,378,120" data-ctr="2.25%" data-partial="0"/>
+      <rect class="bar" x="157.06" y="136.56" width="42.35" height="129.44" rx="3" ry="3" tabindex="0" data-month="Jun 2025" data-clicks="736,215" data-impr="36,887,545" data-ctr="2.00%" data-partial="0"/>
+      <rect class="bar" x="207.41" y="162.28" width="42.35" height="103.72" rx="3" ry="3" tabindex="0" data-month="Jul 2025" data-clicks="589,881" data-impr="32,246,455" data-ctr="1.83%" data-partial="0"/>
+      <rect class="bar" x="257.76" y="149.57" width="42.35" height="116.43" rx="3" ry="3" tabindex="0" data-month="Aug 2025" data-clicks="662,210" data-impr="35,695,264" data-ctr="1.86%" data-partial="0"/>
+      <rect class="bar" x="308.12" y="124.36" width="42.35" height="141.64" rx="3" ry="3" tabindex="0" data-month="Sep 2025" data-clicks="805,561" data-impr="41,710,455" data-ctr="1.93%" data-partial="0"/>
+      <rect class="bar" x="358.47" y="124.29" width="42.35" height="141.71" rx="3" ry="3" tabindex="0" data-month="Oct 2025" data-clicks="805,972" data-impr="38,181,718" data-ctr="2.11%" data-partial="0"/>
+      <rect class="bar" x="408.82" y="143.66" width="42.35" height="122.34" rx="3" ry="3" tabindex="0" data-month="Nov 2025" data-clicks="695,816" data-impr="34,176,908" data-ctr="2.04%" data-partial="0"/>
+      <rect class="bar" x="459.18" y="163.91" width="42.35" height="102.09" rx="3" ry="3" tabindex="0" data-month="Dec 2025" data-clicks="580,651" data-impr="34,263,534" data-ctr="1.69%" data-partial="0"/>
+      <rect class="bar" x="509.53" y="116.67" width="42.35" height="149.33" rx="3" ry="3" tabindex="0" data-month="Jan 2026" data-clicks="849,311" data-impr="60,617,872" data-ctr="1.40%" data-partial="0"/>
+      <rect class="bar" x="559.88" y="101.49" width="42.35" height="164.51" rx="3" ry="3" tabindex="0" data-month="Feb 2026" data-clicks="935,624" data-impr="68,714,335" data-ctr="1.36%" data-partial="0"/>
+      <rect class="bar" x="610.24" y="86.53" width="42.35" height="179.47" rx="3" ry="3" tabindex="0" data-month="Mar 2026" data-clicks="1,020,716" data-impr="67,135,108" data-ctr="1.52%" data-partial="0"/>
+      <rect class="bar" x="660.59" y="98.51" width="42.35" height="167.49" rx="3" ry="3" tabindex="0" data-month="Apr 2026" data-clicks="952,615" data-impr="59,063,425" data-ctr="1.61%" data-partial="0"/>
+      <rect class="bar" x="710.94" y="91.85" width="42.35" height="174.15" rx="3" ry="3" tabindex="0" data-month="May 2026" data-clicks="990,486" data-impr="60,736,761" data-ctr="1.63%" data-partial="0"/>
+      <rect class="bar" x="761.29" y="134.64" width="42.35" height="131.36" rx="3" ry="3" tabindex="0" data-month="Jun 2026" data-clicks="747,123" data-impr="43,176,409" data-ctr="1.73%" data-partial="0"/>
+      <rect class="bar partial" x="811.65" y="187.67" width="42.35" height="78.33" rx="3" ry="3" tabindex="0" data-month="Jul 2026" data-clicks="445,479" data-impr="22,255,987" data-ctr="2.00%" data-partial="1"/>
+        </g>
+        <g id="labels">
+      <text class="axis-label year-tick" x="27.18" y="282" text-anchor="middle">Mar '25</text>
+      <text class="axis-label" x="77.53" y="282" text-anchor="middle">Apr</text>
+      <text class="axis-label" x="127.88" y="282" text-anchor="middle">May</text>
+      <text class="axis-label" x="178.24" y="282" text-anchor="middle">Jun</text>
+      <text class="axis-label" x="228.59" y="282" text-anchor="middle">Jul</text>
+      <text class="axis-label" x="278.94" y="282" text-anchor="middle">Aug</text>
+      <text class="axis-label" x="329.29" y="282" text-anchor="middle">Sep</text>
+      <text class="axis-label" x="379.65" y="282" text-anchor="middle">Oct</text>
+      <text class="axis-label" x="430.00" y="282" text-anchor="middle">Nov</text>
+      <text class="axis-label" x="480.35" y="282" text-anchor="middle">Dec</text>
+      <text class="axis-label year-tick" x="530.71" y="282" text-anchor="middle">Jan '26</text>
+      <text class="axis-label" x="581.06" y="282" text-anchor="middle">Feb</text>
+      <text class="axis-label" x="631.41" y="282" text-anchor="middle">Mar</text>
+      <text class="axis-label" x="681.76" y="282" text-anchor="middle">Apr</text>
+      <text class="axis-label" x="732.12" y="282" text-anchor="middle">May</text>
+      <text class="axis-label" x="782.47" y="282" text-anchor="middle">Jun</text>
+      <text class="axis-label" x="832.82" y="282" text-anchor="middle">Jul</text>
+        </g>
+      </svg>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">Monthly detail</div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Month</th><th>Clicks</th><th>Impressions</th><th>CTR</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mar 2025 <span class="tag">partial</span></td><td class="num">1,187,954</td><td class="num">36,177,103</td><td class="num">3.28%</td></tr>
+          <tr><td>Apr 2025</td><td class="num">1,421,870</td><td class="num">49,865,063</td><td class="num">2.85%</td></tr>
+          <tr><td>May 2025</td><td class="num">1,312,328</td><td class="num">58,378,120</td><td class="num">2.25%</td></tr>
+          <tr><td>Jun 2025</td><td class="num">736,215</td><td class="num">36,887,545</td><td class="num">2.00%</td></tr>
+          <tr><td>Jul 2025</td><td class="num">589,881</td><td class="num">32,246,455</td><td class="num">1.83%</td></tr>
+          <tr><td>Aug 2025</td><td class="num">662,210</td><td class="num">35,695,264</td><td class="num">1.86%</td></tr>
+          <tr><td>Sep 2025</td><td class="num">805,561</td><td class="num">41,710,455</td><td class="num">1.93%</td></tr>
+          <tr><td>Oct 2025</td><td class="num">805,972</td><td class="num">38,181,718</td><td class="num">2.11%</td></tr>
+          <tr><td>Nov 2025</td><td class="num">695,816</td><td class="num">34,176,908</td><td class="num">2.04%</td></tr>
+          <tr><td>Dec 2025</td><td class="num">580,651</td><td class="num">34,263,534</td><td class="num">1.69%</td></tr>
+          <tr><td>Jan 2026</td><td class="num">849,311</td><td class="num">60,617,872</td><td class="num">1.40%</td></tr>
+          <tr><td>Feb 2026</td><td class="num">935,624</td><td class="num">68,714,335</td><td class="num">1.36%</td></tr>
+          <tr><td>Mar 2026</td><td class="num">1,020,716</td><td class="num">67,135,108</td><td class="num">1.52%</td></tr>
+          <tr><td>Apr 2026</td><td class="num">952,615</td><td class="num">59,063,425</td><td class="num">1.61%</td></tr>
+          <tr><td>May 2026</td><td class="num">990,486</td><td class="num">60,736,761</td><td class="num">1.63%</td></tr>
+          <tr><td>Jun 2026</td><td class="num">747,123</td><td class="num">43,176,409</td><td class="num">1.73%</td></tr>
+          <tr><td>Jul 2026 <span class="tag">partial</span></td><td class="num">445,479</td><td class="num">22,255,987</td><td class="num">2.00%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Source: Google Search Console, property <code>sc-domain:supersummary.com</code>, search type WEB, all pages (site-wide, no page/query filter). Pulled July 20, 2026. Data state: all (matches GSC dashboard; may include unconfirmed data from the last 2–3 days). GSC's retention ceiling (~16 months) is why this covers Mar 2025 → Jul 2026 rather than the full 24 months requested.
+  </footer>
+</div>
+
+<script>
+  const tooltip = document.getElementById('tooltip');
+  const wrap = document.getElementById('chartWrap');
+  document.querySelectorAll('.bar').forEach(bar => {
+    const show = (e) => {
+      const month = bar.getAttribute('data-month');
+      const clicks = bar.getAttribute('data-clicks');
+      const impr = bar.getAttribute('data-impr');
+      const ctr = bar.getAttribute('data-ctr');
+      const partial = bar.getAttribute('data-partial') === '1';
+      tooltip.innerHTML = `<b>${month}</b>${partial ? ' <span class="flag">· partial</span>' : ''}<br>${clicks} clicks · ${impr} impr · ${ctr} CTR`;
+      const wrapRect = wrap.getBoundingClientRect();
+      const barRect = bar.getBoundingClientRect();
+      const x = barRect.left - wrapRect.left + barRect.width / 2;
+      const y = barRect.top - wrapRect.top;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+      tooltip.classList.add('show');
+    };
+    const hide = () => tooltip.classList.remove('show');
+    bar.addEventListener('mouseenter', show);
+    bar.addEventListener('mousemove', show);
+    bar.addEventListener('mouseleave', hide);
+    bar.addEventListener('focus', show);
+    bar.addEventListener('blur', hide);
+  });
+</script>
